@@ -1,0 +1,34 @@
+@desktop: ~'only screen and (min-width: 960px)';
+@mobile: ~'only screen and (max-width: 959px)';
+
+.cardClass {
+  margin: auto;
+}
+
+.cardDiv {
+  width: 100%;
+  padding-top: 1em;
+  padding-bottom: 3em;
+}
+
+@media @desktop {
+  .cardDiv {
+    padding-left: 5em;
+    padding-right: 5em;
+  }
+
+  .cardClass {
+    width: 50%;
+  }
+}
+
+@media @mobile {
+  .cardDiv {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .cardClass {
+    width: 90%;
+  }
+}
