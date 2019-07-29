@@ -1,0 +1,25 @@
+@desktop: ~'only screen and (min-width: 960px)';
+@mobile: ~'only screen and (max-width: 959px)';
+
+.screenshotClass {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.screenshotDiv {
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+@media @desktop {
+  .screenshotClass {
+    width: 70%;
+  }
+}
+
+@media @mobile {
+  .screenshotClass {
+    width: 90%;
+  }
+}

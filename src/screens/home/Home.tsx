@@ -1,14 +1,12 @@
 import React from 'react';
 import Card from '../../ui/card/Card';
-import classes from './Header.module.less';
-import { Typography } from 'antd';
-const { Title } = Typography;
-const { header } = classes;
+import Paragraph from '../../ui/paragraph/Paragraph';
+import Title from '../../ui/title/Title';
 
 const home = () => {
   const Header = () => (
-    <div className={header}>
-      <Title>Tony Martinez</Title>
+    <div>
+      <Title level={1}>Tony Martinez</Title>
       <Title level={3}>Full-Stack Engineer</Title>
     </div>
   );
@@ -16,7 +14,13 @@ const home = () => {
   return (
     <>
       <Header />
-      <Card />
+      <Card title='About'>
+        <Paragraph>
+          I'm a full-stack engineer that loves building web apps with React. I
+          have experience using React, GraphQL, ASP.NET Core, and MongoDB. I'm
+          currently seeking a full-time development position in San Diego.
+        </Paragraph>
+      </Card>
     </>
   );
 };

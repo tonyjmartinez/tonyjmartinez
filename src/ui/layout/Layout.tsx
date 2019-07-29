@@ -1,34 +1,63 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
 import classes from './Layout.module.less';
 
 const { Header, Content, Footer } = Layout;
 
 const { footer, menu, content, contentDiv } = classes;
 
-interface Props {
-  children: React.ReactNode;
+// TODO: Create correct interface for props when
+// using withRouter
+export interface Props {
+  children?: React.ReactNode;
+  location: string;
 }
 
-const layout = (props: Props) => (
-  <Layout className="layout">
-    <Header>
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['1']}
-        className={menu}
-      >
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
-      </Menu>
-    </Header>
-    <Content className={content}>
-      <div className={contentDiv}>{props.children}</div>
-    </Content>
-    <Footer className={footer} />
-  </Layout>
-);
+const layout = (props: any) => {
+  const { children, location } = props;
+  const { pathname } = location;
 
-export default layout;
+  let selected: string = '1';
+
+  switch (pathname) {
+    case '/':
+      selected = '1';
+      break;
+    case '/projects':
+      selected = '2';
+      break;
+    case '/skills':
+      selected = '3';
+      break;
+  }
+
+  return (
+    <Layout className='layout'>
+      <Header>
+        <Menu
+          theme='dark'
+          mode='horizontal'
+          defaultSelectedKeys={[selected]}
+          className={menu}
+        >
+          <Menu.Item key='1'>
+            <Link to='/'>Home</Link>
+          </Menu.Item>
+
+          <Menu.Item key='2'>
+            <Link to='/projects'>Projects</Link>
+          </Menu.Item>
+
+          <Menu.Item key='3'>Skills</Menu.Item>
+        </Menu>
+      </Header>
+      <Content className={content}>
+        <div className={contentDiv}>{children}</div>
+      </Content>
+      <Footer className={footer} />
+    </Layout>
+  );
+};
+
+export default withRouter(layout);
