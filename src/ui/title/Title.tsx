@@ -1,7 +1,7 @@
-import React, { Children } from 'react';
-import { Typography } from 'antd';
-import classes from './Title.module.less';
-import { string } from 'prop-types';
+import React, { Children } from "react";
+import { Typography } from "antd";
+import classes from "./Title.module.less";
+import { string } from "prop-types";
 const { Title } = Typography;
 const { titleDiv } = classes;
 
@@ -15,11 +15,9 @@ const title = (props: Props) => {
 
   let lvl;
   if (level === 1) {
-    lvl = '1em';
+    lvl = "1em";
   } else if (level === 3) {
-    lvl = '1em';
-  } else if (level === 4) {
-    lvl = '0em';
+    lvl = "0em";
   }
 
   return (

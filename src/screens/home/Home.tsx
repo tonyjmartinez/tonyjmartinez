@@ -19,8 +19,13 @@ const home = () => {
       <Card title="About">
         <Paragraph>
           I'm a full-stack engineer that loves building web apps with React. I
-          have experience using React, GraphQL, ASP.NET Core, and MongoDB. I'm
+          have experience using React, GraphQL, Asp.NET Core, and MongoDB. I'm
           currently seeking a full-time development position in San Diego.
+        </Paragraph>
+        <Paragraph>
+          I have 3 years of experience working with React, Asp.NET Core/EF
+          framework, and Android. My current current role involves making
+          internal web and Android applications.
         </Paragraph>
         <SocialIcon url="https://github.com/tonyjmartinez" />
         <SocialIcon url="https://linkedin.com/in/tonyjmartinez" />
