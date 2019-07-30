@@ -1,7 +1,7 @@
-import React from 'react';
-import { Layout, Menu } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
-import classes from './Layout.module.less';
+import React from "react";
+import { Layout, Menu } from "antd";
+import { Link, withRouter } from "react-router-dom";
+import classes from "./Layout.module.scss";
 
 const { Header, Content, Footer } = Layout;
 
@@ -18,38 +18,40 @@ const layout = (props: any) => {
   const { children, location } = props;
   const { pathname } = location;
 
-  let selected: string = '1';
+  let selected: string = "1";
 
   switch (pathname) {
-    case '/':
-      selected = '1';
+    case "/":
+      selected = "1";
       break;
-    case '/projects':
-      selected = '2';
+    case "/projects":
+      selected = "2";
       break;
-    case '/skills':
-      selected = '3';
+    case "/skills":
+      selected = "3";
       break;
   }
 
   return (
-    <Layout className='layout'>
+    <Layout className="layout">
       <Header>
         <Menu
-          theme='dark'
-          mode='horizontal'
+          theme="dark"
+          mode="horizontal"
           defaultSelectedKeys={[selected]}
           className={menu}
         >
-          <Menu.Item key='1'>
-            <Link to='/'>Home</Link>
+          <Menu.Item key="1">
+            <Link to="/">Home</Link>
           </Menu.Item>
 
-          <Menu.Item key='2'>
-            <Link to='/projects'>Projects</Link>
+          <Menu.Item key="2">
+            <Link to="/projects">Projects</Link>
           </Menu.Item>
 
-          <Menu.Item key='3'>Skills</Menu.Item>
+          <Menu.Item key="3">
+            <Link to="/skills">Skills</Link>
+          </Menu.Item>
         </Menu>
       </Header>
       <Content className={content}>

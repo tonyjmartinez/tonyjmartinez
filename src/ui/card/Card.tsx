@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Card.module.less";
+import classes from "./Card.module.scss";
 import { Card } from "antd";
 const { cardClass, cardDiv } = classes;
 
@@ -17,10 +17,10 @@ const card = (props: Props) => {
 
   const more = (
     <div>
-      {link ? <a href={link}>{web} Link</a> : null}
+      {link ? <a href={link}>Link {web}</a> : null}
       {repo ? (
         <a style={{ marginLeft: "2em" }} href={repo}>
-          {git} Github Repo
+          Github Repo {git}
         </a>
       ) : null}
     </div>

@@ -1,5 +1,5 @@
-@desktop: ~'only screen and (min-width: 960px)';
-@mobile: ~'only screen and (max-width: 959px)';
+$desktop: 960px;
+$mobile: 959px;
 
 .cardClass {
   margin: auto;
@@ -11,7 +11,7 @@
   padding-bottom: 3em;
 }
 
-@media @desktop {
+@media (min-width: $desktop) {
   .cardDiv {
     padding-left: 5em;
     padding-right: 5em;
@@ -22,7 +22,7 @@
   }
 }
 
-@media @mobile {
+@media (max-width: $mobile) {
   .cardDiv {
     padding-left: 1em;
     padding-right: 1em;
