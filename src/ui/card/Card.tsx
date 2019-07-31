@@ -1,6 +1,6 @@
-import React from "react";
-import classes from "./Card.module.scss";
-import { Card } from "antd";
+import React from 'react';
+import classes from './Card.module.scss';
+import { Card } from 'antd';
 const { cardClass, cardDiv } = classes;
 
 export interface Props {
@@ -12,15 +12,15 @@ export interface Props {
 
 const card = (props: Props) => {
   const { title, link, repo, children } = props;
-  const web = "\u{1F310}";
-  const git = "\u{1F5A5}";
+  const web = '\u{1F310}';
+  const git = '\u{1F5A5}';
 
   const more = (
     <div>
       {link ? <a href={link}>Link {web}</a> : null}
       {repo ? (
-        <a style={{ marginLeft: "2em" }} href={repo}>
-          Github Repo {git}
+        <a style={{ marginLeft: '0.5em' }} href={repo}>
+          Repo {git}
         </a>
       ) : null}
     </div>
