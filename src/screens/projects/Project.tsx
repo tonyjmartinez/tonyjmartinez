@@ -8,7 +8,7 @@ export interface Props {
   link: string;
   repo?: string;
   children: React.ReactNode;
-  source: string;
+  source?: string;
 }
 
 const project = (props: Props) => {
@@ -16,7 +16,7 @@ const project = (props: Props) => {
   return (
     <Card title={title} link={link} repo={repo}>
       <Paragraph>{children}</Paragraph>
-      <Screenshot source={source} />
+      {source && <Screenshot source={source} />}
     </Card>
   );
 };

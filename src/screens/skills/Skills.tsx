@@ -1,23 +1,23 @@
-import React from "react";
-import Title from "../../ui/title/Title";
-import Skill from "./Skill";
+import React from 'react';
+import Title from '../../ui/title/Title';
+import Skill from './Skill';
 
 const mySkills = [
   {
-    title: "JavaScript",
-    desc: "ES5/6, React/Hooks, Redux, TypeScript, JSX, Jest"
+    title: 'JavaScript',
+    desc: 'ES5/6, React/Hooks, Apollo GraphQL, Redux, TypeScript, Jest'
   },
   {
-    title: "HTML/CSS",
-    desc: "CSS-in-JS, SASS, Responsive Design"
+    title: 'HTML/CSS',
+    desc: 'CSS-in-JS, SASS, Responsive Design'
   },
   {
-    title: "C#",
-    desc: "Asp.NET Core"
+    title: 'Backend',
+    desc: 'Asp.NET Core, GraphQL, Express'
   },
   {
-    title: "SQL, MongoDB",
-    desc: "Entity Framework Core, Mongoose"
+    title: 'Database',
+    desc: 'SQL/Entity Framework Core, MongoDB/Mongoose'
   }
 ];
 

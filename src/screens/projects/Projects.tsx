@@ -9,6 +9,8 @@ const projects = () => {
   const title23 = `23 vs 23 ${bball}`;
   const blog = '\u{1F4AC}';
   const titleBpm = `Blog Plus Minus ${blog}`;
+  const octopus = '\u{1F419}';
+  const styleguidist = `React-Styleguidist ${octopus}`;
   return (
     <>
       <Title level={1}>Projects</Title>
@@ -29,8 +31,15 @@ const projects = () => {
         repo='https://github.com/tonyjmartinez/blogplusminus'
         source={projectBlogPlusMinus}
       >
-        Blog built with ReactJs, GraphQL, Express, and Mongo Db. Uses
-        JWT/refresh token authentication and Material-UI components.
+        Blog built with ReactJs, GraphQL, Express, and MongoDB. Uses JWT/refresh
+        token authentication and Material-UI components.
+      </Project>
+      <Project
+        title={styleguidist}
+        link='https://github.com/styleguidist/react-styleguidist'
+      >
+        Open source contributions to React-Styleguidist, a library that provides
+        an environment to document, test, and develop React components.
       </Project>
     </>
   );
