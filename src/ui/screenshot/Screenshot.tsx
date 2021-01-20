@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
-import classes from './Screenshot.module.scss';
+import React, { useState } from "react";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import classes from "./Screenshot.module.scss";
 const { screenshotClass, screenshotDiv } = classes;
 
 export interface Props {
@@ -13,6 +13,7 @@ const Screenshot = (props: Props) => {
   return (
     <div className={screenshotDiv}>
       <img
+        alt="screenshot"
         className={screenshotClass}
         src={source}
         onClick={() => setOpen(true)}

@@ -1,7 +1,6 @@
-import React, { Children } from "react";
+import React from "react";
 import { Typography } from "antd";
 import classes from "./Title.module.less";
-import { string } from "prop-types";
 const { Title } = Typography;
 const { titleDiv } = classes;
 
