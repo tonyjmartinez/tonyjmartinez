@@ -1,35 +1,35 @@
-import React from "react";
-import { Layout, Menu } from "antd";
-import { Link, withRouter } from "react-router-dom";
-import classes from "./Layout.module.scss";
+import React from 'react'
+import {Layout, Menu} from 'antd'
+import {Link, withRouter} from 'react-router-dom'
+import classes from './Layout.module.scss'
 
-const { Header, Content, Footer } = Layout;
+const {Header, Content, Footer} = Layout
 
-const { footer, menu, content, contentDiv } = classes;
+const {footer, menu, content, contentDiv} = classes
 
 // TODO: Create correct interface for props when
 // using withRouter
 export interface Props {
-  children?: React.ReactNode;
-  location: string;
+  children?: React.ReactNode
+  location: string
 }
 
 const layout = (props: any) => {
-  const { children, location } = props;
-  const { pathname } = location;
+  const {children, location} = props
+  const {pathname} = location
 
-  let selected: string = "1";
+  let selected: string = '1'
 
   switch (pathname) {
-    case "/":
-      selected = "1";
-      break;
-    case "/projects":
-      selected = "2";
-      break;
-    case "/skills":
-      selected = "3";
-      break;
+    case '/':
+      selected = '1'
+      break
+    case '/projects':
+      selected = '2'
+      break
+    case '/skills':
+      selected = '3'
+      break
   }
 
   return (
@@ -59,7 +59,7 @@ const layout = (props: any) => {
       </Content>
       <Footer className={footer} />
     </Layout>
-  );
-};
+  )
+}
 
-export default withRouter(layout);
+export default withRouter(layout)

@@ -1,31 +1,35 @@
-import React from "react";
-import { Typography } from "antd";
-import classes from "./Title.module.less";
-const { Title } = Typography;
-const { titleDiv } = classes;
+import React from 'react'
+import {Typography} from 'antd'
+const {Title} = Typography
 
 export interface Props {
-  level: 1 | 2 | 3 | 4 | undefined;
-  children: React.ReactNode;
+  level: 1 | 2 | 3 | 4 | undefined
+  children: React.ReactNode
 }
 
 const title = (props: Props) => {
-  const { level, children } = props;
+  const {level, children} = props
 
-  let lvl;
+  let lvl
   if (level === 1) {
-    lvl = "1em";
+    lvl = '1em'
   } else if (level === 3) {
-    lvl = "0em";
+    lvl = '0em'
   }
 
   return (
-    <div className={titleDiv}>
-      <Title style={{ paddingTop: lvl }} level={level}>
+    <div
+      style={{
+        width: '100%',
+        textAlign: 'center',
+        marginBottom: '0em',
+      }}
+    >
+      <Title style={{paddingTop: lvl}} level={level}>
         {children}
       </Title>
     </div>
-  );
-};
+  )
+}
 
-export default title;
+export default title
