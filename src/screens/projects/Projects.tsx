@@ -25,7 +25,11 @@ const projects = () => {
         visualization for player stats fetched from the MySportsFeeds API. Also
         utilizes Material-Ui components, React-Autocomplete, and React-Swipe.
       </Project>
-      <Project title={`The Hackboard`} link="https://thehackboard.com">
+      <Project
+        title={`The Hackboard`}
+        link="https://thehackboard.com"
+        repo="https://github.com/tonyjmartinez/the-hackboard-next"
+      >
         Blog that supports MDX viewing and editing. MDX posts can be saved as
         local files or retrieved through an authenticated GraphQL server.
       </Project>
