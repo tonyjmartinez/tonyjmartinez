@@ -21,33 +21,9 @@ const projects = () => {
         repo="https://github.com/tonyjmartinez/23vs23"
         source={project23v23}
       >
-        React/Redux NBA player stats comparator. Uses React-Vis to provide data
-        visualization for player stats fetched from the MySportsFeeds API. Also
-        utilizes Material-Ui components, React-Autocomplete, and React-Swipe.
-      </Project>
-      <Project
-        title={`The Hackboard`}
-        link="https://thehackboard.com"
-        repo="https://github.com/tonyjmartinez/the-hackboard-next"
-      >
-        Blog that supports MDX viewing and editing. MDX posts can be saved as
-        local files or retrieved through an authenticated GraphQL server.
-      </Project>
-      <Project
-        title={titleBpm}
-        link="#"
-        repo="https://github.com/tonyjmartinez/blogplusminus"
-        source={projectBlogPlusMinus}
-      >
-        Blog built with ReactJs, GraphQL, Express, and MongoDB. Uses JWT/refresh
-        token authentication and Material-UI components.
-      </Project>
-      <Project
-        title={styleguidist}
-        link="https://github.com/styleguidist/react-styleguidist"
-      >
-        Open source contributions to React-Styleguidist, a library that provides
-        an environment to document, test, and develop React components.
+        React NBA player stats comparator. React-Vis is used for visualizing
+        player stats fetched from the MySportsFeeds API. Material-Ui components,
+        React-Autocomplete, and React-Swipe are used for the UI/UX.
       </Project>
     </>
   )

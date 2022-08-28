@@ -17,8 +17,8 @@ const home = () => {
       <Header />
       <Card title="About">
         <Paragraph>
-          I'm a full-stack engineer with 5 years of experience that loves
-          building web apps with React, NextJs, Typescript, and GraphQL. I'm
+          I'm a Senior Frontend Engineer with 6 years of experience that loves
+          building web apps with React/NextJs, Typescript, and GraphQL. I'm
           currently seeking a full-time development position in the San Diego
           area.
         </Paragraph>

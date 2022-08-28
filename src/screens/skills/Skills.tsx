@@ -5,7 +5,7 @@ import Skill from './Skill'
 const mySkills = [
   {
     title: 'React/Javascript Ecosystem',
-    desc: 'ES5/6, React/Hooks, URQL GraphQL, TypeScript, React Testing Library',
+    desc: 'React, NextJs, Hasura GraphQL, TypeScript, React Testing Library, React Query',
   },
   {
     title: 'HTML/CSS',
@@ -13,11 +13,7 @@ const mySkills = [
   },
   {
     title: 'Backend',
-    desc: 'Asp.NET Core, GraphQL, Express',
-  },
-  {
-    title: 'Database',
-    desc: 'SQL/Entity Framework Core, MongoDB/Mongoose',
+    desc: 'Hasura GraphQL, Express',
   },
 ]
 
