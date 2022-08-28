@@ -1,6 +1,6 @@
 import React from 'react'
 import {Layout, Menu} from 'antd'
-import {Link, withRouter} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import classes from './Layout.module.scss'
 
 const {Header, Content, Footer} = Layout
@@ -14,9 +14,9 @@ export interface Props {
   location: string
 }
 
-const layout = (props: any) => {
-  const {children, location} = props
-  const {pathname} = location
+const LayoutContainer = (props: any) => {
+  const {children} = props
+  const {pathname} = useLocation()
 
   let selected: string = '1'
 
@@ -62,4 +62,4 @@ const layout = (props: any) => {
   )
 }
 
-export default withRouter(layout)
+export default LayoutContainer

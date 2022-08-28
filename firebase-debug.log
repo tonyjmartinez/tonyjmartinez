@@ -1,0 +1,40 @@
+[debug] [2022-08-28T20:04:51.685Z] ----------------------------------------------------------------------
+[debug] [2022-08-28T20:04:51.687Z] Command:       /usr/local/bin/firebase /home/tony/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase deploy
+[debug] [2022-08-28T20:04:51.688Z] CLI Version:   11.8.0
+[debug] [2022-08-28T20:04:51.688Z] Platform:      linux
+[debug] [2022-08-28T20:04:51.688Z] Node Version:  v16.16.0
+[debug] [2022-08-28T20:04:51.688Z] Time:          Sun Aug 28 2022 13:04:51 GMT-0700 (Pacific Daylight Time)
+[debug] [2022-08-28T20:04:51.688Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-08-28T20:04:51.691Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-08-28T20:04:51.755Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-08-28T20:04:51.756Z] > authorizing via signed-in user (ajosephmartinez@gmail.com)
+[debug] [2022-08-28T20:04:51.756Z] [iam] checking project tonyjmartinez-site for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-08-28T20:04:51.756Z] > refreshing access token with scopes: []
+[debug] [2022-08-28T20:04:51.757Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-08-28T20:04:51.757Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-28T20:04:51.953Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-08-28T20:04:51.953Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-08-28T20:04:51.969Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2022-08-28T20:04:51.969Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-28T20:04:51.969Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/tonyjmartinez-site:testIamPermissions [none]
+[debug] [2022-08-28T20:04:51.970Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/tonyjmartinez-site:testIamPermissions x-goog-quota-user=projects/tonyjmartinez-site
+[debug] [2022-08-28T20:04:51.970Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/tonyjmartinez-site:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-08-28T20:04:52.295Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/tonyjmartinez-site:testIamPermissions 401
+[debug] [2022-08-28T20:04:52.295Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/tonyjmartinez-site:testIamPermissions {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"service":"cloudresourcemanager.googleapis.com","method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions"}}]}}
+[debug] [2022-08-28T20:04:52.296Z] [iam] error while checking permissions, command may fail: FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2022-08-28T20:04:52.297Z] > refreshing access token with scopes: []
+[debug] [2022-08-28T20:04:52.297Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-08-28T20:04:52.297Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-28T20:04:52.434Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2022-08-28T20:04:52.434Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-08-28T20:04:52.436Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/tonyjmartinez-site [none]
+[debug] [2022-08-28T20:04:52.613Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/tonyjmartinez-site 401
+[debug] [2022-08-28T20:04:52.614Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/tonyjmartinez-site {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2022-08-28T20:04:52.614Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2022-08-28T20:04:52.732Z] FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at responseToError (/home/tony/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/responseToError.js:49:12)
+    at RetryOperation._fn (/home/tony/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/apiv2.js:288:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to get Firebase project tonyjmartinez-site. Please make sure the project exists and your account has permission to access it.
