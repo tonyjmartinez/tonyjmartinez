@@ -1,0 +1,97 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { experiences, education, skillGroups } from "../data/resume";
+---
+
+<PageLayout title="Resume" description="Tony Martinez — Software Engineer. Experience, education, and skills.">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold tracking-tight text-(--color-text-primary)">Resume</h1>
+    <p class="mt-2 text-(--color-text-secondary)">
+      Software Engineer with experience building web applications, developer tools, and data-driven products.
+    </p>
+  </header>
+
+  <!-- Experience -->
+  <section class="mb-12">
+    <h2 class="mb-6 text-xl font-bold text-(--color-text-primary)">Experience</h2>
+    <div class="space-y-8">
+      {experiences.map((exp) => (
+        <div class="relative border-l-2 border-(--color-border) pl-6">
+          <div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-brand-500 bg-(--color-surface)"></div>
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 class="font-semibold text-(--color-text-primary)">{exp.role}</h3>
+              <p class="text-sm text-brand-600 dark:text-brand-400">{exp.company}</p>
+            </div>
+            <span class="text-sm text-(--color-text-muted)">{exp.period}</span>
+          </div>
+          <p class="mt-2 text-sm text-(--color-text-secondary)">{exp.description}</p>
+          <ul class="mt-3 space-y-1">
+            {exp.highlights.map((h) => (
+              <li class="flex items-start gap-2 text-sm text-(--color-text-secondary)">
+                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-(--color-text-muted)" aria-hidden="true"></span>
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="mb-12">
+    <h2 class="mb-6 text-xl font-bold text-(--color-text-primary)">Education</h2>
+    <div class="space-y-4">
+      {education.map((edu) => (
+        <div class="relative border-l-2 border-(--color-border) pl-6">
+          <div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-brand-500 bg-(--color-surface)"></div>
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 class="font-semibold text-(--color-text-primary)">{edu.degree}</h3>
+              <p class="text-sm text-brand-600 dark:text-brand-400">{edu.school}</p>
+            </div>
+            <span class="text-sm text-(--color-text-muted)">{edu.period}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="mb-12">
+    <h2 class="mb-6 text-xl font-bold text-(--color-text-primary)">Skills</h2>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {skillGroups.map((group) => (
+        <div>
+          <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider text-(--color-text-muted)">
+            {group.category}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {group.skills.map((skill) => (
+              <span class="rounded-full bg-(--color-surface-raised) px-3 py-1 text-sm text-(--color-text-secondary)">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  @media print {
+    header nav,
+    footer,
+    button {
+      display: none !important;
+    }
+
+    * {
+      color: black !important;
+      background: white !important;
+      border-color: #ccc !important;
+    }
+  }
+</style>

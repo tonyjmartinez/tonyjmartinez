@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* --- Font Face Declarations --- */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* --- Tailwind Theme Configuration --- */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Brand colors */
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+
+  /* Surface colors (light mode defaults) */
+  --color-surface: #ffffff;
+  --color-surface-alt: #f8fafc;
+  --color-surface-raised: #f1f5f9;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+  --color-border: #e2e8f0;
+}
+
+/* --- Base Styles --- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Dark mode overrides */
+  html.dark {
+    --color-surface: #0f172a;
+    --color-surface-alt: #1e293b;
+    --color-surface-raised: #334155;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-border: #334155;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  html.dark ::selection {
+    background-color: var(--color-brand-800);
+    color: var(--color-brand-100);
+  }
+}
+
+/* --- Prose styles for blog content --- */
+@layer components {
+  .prose {
+    max-width: 65ch;
+    line-height: 1.75;
+  }
+
+  .prose h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+    scroll-margin-top: 5rem;
+  }
+
+  .prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.4;
+    color: var(--color-text-primary);
+    scroll-margin-top: 5rem;
+  }
+
+  .prose h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+    color: var(--color-text-primary);
+    scroll-margin-top: 5rem;
+  }
+
+  .prose p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    color: var(--color-text-secondary);
+  }
+
+  .prose a {
+    color: var(--color-brand-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+  }
+
+  html.dark .prose a {
+    color: var(--color-brand-400);
+  }
+
+  .prose a:hover {
+    color: var(--color-brand-700);
+  }
+
+  html.dark .prose a:hover {
+    color: var(--color-brand-300);
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  .prose li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    color: var(--color-text-secondary);
+  }
+
+  .prose blockquote {
+    border-left: 4px solid var(--color-brand-500);
+    padding-left: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-style: italic;
+    color: var(--color-text-secondary);
+  }
+
+  .prose pre {
+    background-color: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  .prose :not(pre) > code {
+    background-color: var(--color-surface-raised);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+  }
+
+  .prose img {
+    border-radius: 0.5rem;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  .prose hr {
+    border-color: var(--color-border);
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-size: 0.875rem;
+  }
+
+  .prose th {
+    border-bottom: 2px solid var(--color-border);
+    padding: 0.75em;
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .prose td {
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.75em;
+    color: var(--color-text-secondary);
+  }
+}

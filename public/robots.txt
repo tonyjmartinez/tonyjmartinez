@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tonyjmartinez.com/sitemap-index.xml

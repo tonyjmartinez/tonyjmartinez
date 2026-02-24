@@ -1,0 +1,48 @@
+---
+title: "Hello World: Building This Site with Astro + MDX"
+description: "A look at how I built this portfolio site using Astro, MDX, React islands, and Tailwind CSS — deployed to Cloudflare Pages."
+pubDate: 2025-12-15
+tags: ["astro", "web-dev", "mdx"]
+---
+
+# Hello World
+
+Welcome to my new portfolio site! I built this from scratch using **Astro** with **MDX** for content, **React** for interactive components, and **Tailwind CSS** for styling. It's deployed as a fully static site on **Cloudflare Pages**.
+
+## Why Astro?
+
+After years of working with various frameworks, Astro's approach clicked with me immediately:
+
+- **Zero JavaScript by default** — pages ship as pure HTML unless I explicitly opt in
+- **Islands architecture** — interactive components hydrate independently, only when needed
+- **Native MDX support** — first-class integration for mixing Markdown with components
+- **Vite-powered dev server** — sub-second hot reload during development
+
+## The MDX Advantage
+
+MDX lets me write content in Markdown while embedding custom React components. For example, I can include interactive data visualizations directly in blog posts — check out my [NBA analysis post](/blog/nba-analysis-2025) for an example.
+
+Here's what a typical MDX file looks like:
+
+```mdx
+---
+title: "My Post"
+pubDate: 2025-12-01
+tags: ["example"]
+---
+import NbaChart from '../../components/interactive/NbaChart.tsx';
+
+# My Post
+
+Some prose here, then an interactive chart:
+
+<NbaChart client:visible players={["Player A", "Player B"]} stat="ppg" />
+```
+
+## Performance First
+
+Since every page is pre-rendered at build time, the site loads fast — no server-side rendering, no cold starts, just static files served from Cloudflare's edge network. Interactive React components only ship JavaScript for the specific islands that need it.
+
+## What's Next
+
+I'll be writing about **software engineering**, **NBA analytics**, and other topics that interest me. Stay tuned!

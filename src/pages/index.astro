@@ -1,0 +1,99 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import PostCard from "../components/blog/PostCard.astro";
+import { getCollection } from "astro:content";
+import { getReadingTime } from "../utils/reading-time";
+
+const allPosts = await getCollection("blog", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<PageLayout title="Tony Martinez">
+  <!-- Hero Section -->
+  <section class="py-8 sm:py-12">
+    <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+      <div class="h-24 w-24 shrink-0 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white text-3xl font-bold">
+        TM
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight text-(--color-text-primary) sm:text-4xl">
+          Tony Martinez
+        </h1>
+        <p class="mt-2 text-lg text-(--color-text-secondary)">
+          Software Engineer & NBA Enthusiast
+        </p>
+        <p class="mt-4 max-w-2xl text-(--color-text-secondary)">
+          I build things for the web and write about software engineering, data, and basketball.
+          Welcome to my corner of the internet.
+        </p>
+        <div class="mt-6 flex gap-3">
+          <a
+            href="/blog"
+            class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700"
+          >
+            Read my blog
+          </a>
+          <a
+            href="/resume"
+            class="rounded-lg border border-(--color-border) bg-(--color-surface) px-4 py-2 text-sm font-medium text-(--color-text-primary) transition-colors hover:bg-(--color-surface-raised)"
+          >
+            View resume
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="mt-12 border-t border-(--color-border) pt-12">
+    <h2 class="text-2xl font-bold text-(--color-text-primary)">About Me</h2>
+    <div class="mt-4 space-y-4 text-(--color-text-secondary)">
+      <p>
+        I'm a software engineer who loves building well-crafted web experiences.
+        I'm particularly interested in performance optimization, developer tooling,
+        and creating applications that are both accessible and delightful to use.
+      </p>
+      <p>
+        Outside of code, I'm a big NBA fan. I enjoy digging into basketball analytics
+        and finding stories in the data. You'll find a mix of tech and basketball content
+        on this blog.
+      </p>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-2">
+      {["TypeScript", "React", "Astro", "Node.js", "Python", "SQL", "NBA Analytics"].map((skill) => (
+        <span class="rounded-full bg-(--color-surface-raised) px-3 py-1 text-sm text-(--color-text-secondary)">
+          {skill}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Recent Posts Section -->
+  {recentPosts.length > 0 && (
+    <section class="mt-12 border-t border-(--color-border) pt-12">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-(--color-text-primary)">Recent Posts</h2>
+        <a
+          href="/blog"
+          class="text-sm font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300"
+        >
+          View all &rarr;
+        </a>
+      </div>
+      <div class="mt-6 grid gap-6">
+        {recentPosts.map((post) => (
+          <PostCard
+            post={post}
+            readingTime={getReadingTime(post.body ?? "")}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+</PageLayout>

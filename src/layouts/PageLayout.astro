@@ -1,0 +1,26 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import SkipLink from "../components/layout/SkipLink.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  type?: "website" | "article";
+  pubDate?: Date;
+}
+
+const props = Astro.props;
+---
+
+<BaseLayout {...props}>
+  <SkipLink />
+  <Header />
+  <main id="main-content" class="mx-auto max-w-4xl px-4 py-8">
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>
