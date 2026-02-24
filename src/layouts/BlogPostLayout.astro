@@ -1,0 +1,71 @@
+---
+import PageLayout from "./PageLayout.astro";
+import type { CollectionEntry } from "astro:content";
+import { getReadingTime } from "../utils/reading-time";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  readingTime: string;
+}
+
+const { post, readingTime } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = post.data;
+
+const formattedPubDate = pubDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  type="article"
+  pubDate={pubDate}
+>
+  <article>
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold tracking-tight text-(--color-text-primary) sm:text-4xl">
+        {title}
+      </h1>
+
+      <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-(--color-text-muted)">
+        <time datetime={pubDate.toISOString()}>{formattedPubDate}</time>
+        <span aria-hidden="true">&middot;</span>
+        <span>{readingTime}</span>
+        {updatedDate && (
+          <>
+            <span aria-hidden="true">&middot;</span>
+            <span>
+              Updated <time datetime={updatedDate.toISOString()}>{formattedUpdatedDate}</time>
+            </span>
+          </>
+        )}
+      </div>
+
+      {tags.length > 0 && (
+        <div class="mt-3 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <a
+              href={`/blog/tag/${tag}`}
+              class="rounded-full bg-(--color-surface-raised) px-3 py-1 text-xs font-medium text-(--color-text-secondary) hover:bg-(--color-brand-100) hover:text-brand-700 dark:hover:bg-brand-900/30 dark:hover:text-brand-300 transition-colors"
+            >
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</PageLayout>

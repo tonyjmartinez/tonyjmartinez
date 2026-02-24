@@ -1,0 +1,18 @@
+---
+interface Props {
+  filename?: string;
+}
+
+const { filename } = Astro.props;
+---
+
+<div class="group relative my-6">
+  {filename && (
+    <div class="rounded-t-lg border border-b-0 border-(--color-border) bg-(--color-surface-raised) px-4 py-2 text-xs font-mono text-(--color-text-muted)">
+      {filename}
+    </div>
+  )}
+  <div class:list={[filename ? "rounded-b-lg" : "rounded-lg", "overflow-hidden"]}>
+    <slot />
+  </div>
+</div>
