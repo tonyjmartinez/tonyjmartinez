@@ -1,3 +1,8 @@
 name = "tonyjmartinez-portfolio"
-pages_build_output_dir = "dist"
 compatibility_date = "2025-01-01"
+
+# Static assets directory produced by `npm run build`.
+# This makes `wrangler deploy` serve the dist/ directory as a
+# Cloudflare Workers Assets deployment (the modern static-site approach).
+[assets]
+directory = "./dist"
