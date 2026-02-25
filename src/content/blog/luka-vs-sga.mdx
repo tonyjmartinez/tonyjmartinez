@@ -1,0 +1,112 @@
+---
+title: "The MVP Race That Actually Matters"
+description: "Luka Dončić and Shai Gilgeous-Alexander have been putting up historic numbers. Here's why the gap between them is smaller — and bigger — than you think."
+publishDate: 2024-04-01
+tags: ["nba", "data-viz"]
+---
+
+import { NBAStatGrid, NBAComparison, Aside } from "@components/mdx";
+
+Every season, the MVP conversation starts in October and gets louder until someone
+inevitably wins it in June. But the 2023-24 race felt different. Two players — Luka
+Dončić and Shai Gilgeous-Alexander — spent the entire year trading blows in the box
+score, leading franchises that had no business being as good as they were, and doing it
+in ways that defied easy comparison.
+
+The raw numbers tell one story. The *context* of those numbers tells another.
+
+## Luka's season in numbers
+
+The Mavericks are a playoff team because Luka Dončić wills them into one every year.
+That's not hyperbole — Dallas's offense ranks in the top five when he's on the floor and
+craters to bottom-five when he's not. His 33.9 points per game led the league, but
+the scoring average undersells how he creates offense: he averaged nearly 10 assists while
+also pulling down 9.2 rebounds, making him one of the few players in history to average
+30-9-9 over a full season.
+
+<NBAStatGrid
+  client:visible
+  player="Luka Dončić"
+  season="2023-24"
+  color="#00538C"
+  stats={[
+    { label: "PPG", value: 33.9, max: 45 },
+    { label: "RPG", value: 9.2, max: 15 },
+    { label: "APG", value: 9.8, max: 15 },
+    { label: "FG%", value: 49.6, max: 70 },
+    { label: "TS%", value: 61.6, max: 75 },
+  ]}
+/>
+
+What stands out most is the efficiency. A player averaging that kind of volume at 49.6%
+from the field and a 61.6% true shooting percentage isn't just good — it's historically
+rare. You can count on one hand the players who've averaged 30+ points per game at that
+efficiency level.
+
+## SGA's case
+
+Here's the thing: Shai Gilgeous-Alexander's season deserved more attention than it got.
+Oklahoma City was supposed to be a young, developing team. A playoff bubble squad at best.
+Instead they ran away with the Western Conference's best record — and SGA was the engine.
+
+<NBAStatGrid
+  client:visible
+  player="Shai Gilgeous-Alexander"
+  season="2023-24"
+  color="#007AC1"
+  stats={[
+    { label: "PPG", value: 30.1, max: 45 },
+    { label: "RPG", value: 5.5, max: 15 },
+    { label: "APG", value: 6.4, max: 15 },
+    { label: "FG%", value: 53.5, max: 70 },
+    { label: "TS%", value: 64.0, max: 75 },
+  ]}
+/>
+
+The field goal and true shooting percentages are the argument. SGA shot nearly four
+percentage points better from the field than Luka on comparable volume. He also added
+more steals (2.0 per game, leading the league) while doing it for the best team in the
+West. That's the MVP case in two sentences.
+
+<Aside type="info" title="On efficiency vs. volume">
+  True shooting percentage (TS%) accounts for the different point values of two-pointers,
+  three-pointers, and free throws. It's the cleanest single-number measure of scoring
+  efficiency. SGA's 64.0% would rank among the best ever for a volume scorer.
+</Aside>
+
+## Head to head
+
+Put them side by side and the tradeoffs come into focus. Luka does more — much more —
+in terms of playmaking and rebounding. SGA does his scoring more efficiently and plays
+better defense. Neither answer is obviously correct.
+
+<NBAComparison
+  client:visible
+  playerA={{
+    name: "Luka Dončić",
+    color: "#00538C",
+    stats: { PPG: 33.9, RPG: 9.2, APG: 9.8, "TS%": 61.6 },
+  }}
+  playerB={{
+    name: "SGA",
+    color: "#007AC1",
+    stats: { PPG: 30.1, RPG: 5.5, APG: 6.4, "TS%": 64.0 },
+  }}
+  stats={["PPG", "RPG", "APG", "TS%"]}
+/>
+
+The comparison makes the efficiency gap visible in a way the box score doesn't. Luka's
+bars are longer on counting stats. SGA's bars are longer where it counts most for a
+scorer: shooting percentage.
+
+## So who was better?
+
+Depends on what you value. If you believe the MVP award should go to the player who does
+the most — the player whose team genuinely wouldn't function without him — it's Luka.
+His usage, his playmaking, his rebounding all point to a player who is essentially a
+one-man offense.
+
+If you believe the award should go to the player who did their job most efficiently
+for the team with the best record, it's SGA.
+
+Both are correct framings. That's what makes this race worth arguing about.

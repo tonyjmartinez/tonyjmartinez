@@ -1,0 +1,104 @@
+---
+import TagPill from "./TagPill.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, description, publishDate, tags } = post.data;
+
+const formattedDate = publishDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<article class="blog-card">
+  <a href={`/blog/${post.id}`} class="blog-card__link" aria-label={title}>
+    <div class="blog-card__content">
+      {
+        tags.length > 0 && (
+          <ul class="blog-card__tags" role="list" aria-label="Post tags">
+            {tags.map((tag) => (
+              <li>
+                <TagPill tag={tag} />
+              </li>
+            ))}
+          </ul>
+        )
+      }
+
+      <h2 class="blog-card__title">{title}</h2>
+      <p class="blog-card__description">{description}</p>
+
+      <time class="blog-card__date" datetime={publishDate.toISOString()}>
+        {formattedDate}
+      </time>
+    </div>
+  </a>
+</article>
+
+<style>
+  .blog-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .blog-card:hover {
+    border-color: var(--color-border-emphasis);
+    box-shadow: var(--shadow-md);
+  }
+
+  .blog-card__link {
+    display: block;
+    padding: var(--space-6);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin-bottom: var(--space-3);
+  }
+
+  .blog-card__title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-snug);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-2);
+    transition: color var(--transition-fast);
+  }
+
+  .blog-card:hover .blog-card__title {
+    color: var(--color-accent);
+  }
+
+  .blog-card__description {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-4);
+
+    /* Truncate to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-card__date {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+</style>

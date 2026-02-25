@@ -1,0 +1,75 @@
+---
+import BlogCard from "@components/blog/BlogCard.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <section class="featured" aria-labelledby="featured-heading">
+      <div class="container">
+        <div class="featured__header">
+          <h2 class="featured__title" id="featured-heading">
+            Recent posts
+          </h2>
+          <a href="/blog" class="featured__all-link" aria-label="View all blog posts">
+            All posts &rarr;
+          </a>
+        </div>
+
+        <ul class="featured__grid" role="list">
+          {posts.map((post) => (
+            <li>
+              <BlogCard post={post} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .featured {
+    padding-bottom: var(--space-20);
+  }
+
+  .featured__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .featured__title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-semibold);
+    letter-spacing: -0.02em;
+  }
+
+  .featured__all-link {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .featured__all-link:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .featured__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: var(--space-5);
+    list-style: none;
+  }
+</style>

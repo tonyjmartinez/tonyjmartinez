@@ -1,0 +1,100 @@
+---
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+] as const;
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === "/") return currentPath === "/";
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="Tony Martinez — home">
+      <span aria-hidden="true">tm</span>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <ul class="header__nav" role="list">
+        {
+          navLinks.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="header__nav-link"
+                aria-current={isActive(href) ? "page" : undefined}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .header__logo {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    transition: color var(--transition-fast);
+  }
+
+  .header__logo:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .header__nav {
+    display: flex;
+    gap: var(--space-1);
+    list-style: none;
+  }
+
+  .header__nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+  }
+
+  .header__nav-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-emphasis);
+  }
+
+  .header__nav-link[aria-current="page"] {
+    color: var(--color-text-primary);
+    background-color: var(--color-accent-subtle);
+  }
+</style>

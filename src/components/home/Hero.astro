@@ -1,0 +1,175 @@
+---
+const socialLinks = [
+  { href: "https://github.com/tonyjmartinez", label: "GitHub" },
+  { href: "https://twitter.com/tonyjmartinez", label: "X / Twitter" },
+] as const;
+---
+
+<section class="hero" aria-label="Introduction">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__eyebrow">Hey, I'm</p>
+      <h1 class="hero__name">Tony Martinez</h1>
+      <p class="hero__bio">
+        Software engineer who loves building things for the web. I write about
+        basketball, React, and whatever else I'm thinking about.
+      </p>
+
+      <nav aria-label="Social profiles">
+        <ul class="hero__links" role="list">
+          {
+            socialLinks.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  class="hero__link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {label}
+                  <span class="sr-only">(opens in new tab)</span>
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="/blog" class="hero__link hero__link--primary">
+              Read the blog &rarr;
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="hero__avatar-wrap" aria-hidden="true">
+      <img
+        src="/images/avatar.svg"
+        alt="Tony Martinez"
+        class="hero__avatar"
+        width="200"
+        height="200"
+        loading="eager"
+        decoding="sync"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-16);
+  }
+
+  .hero__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-12);
+  }
+
+  @media (max-width: 640px) {
+    .hero__inner {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: var(--space-8);
+    }
+  }
+
+  .hero__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero__eyebrow {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--space-2);
+  }
+
+  .hero__name {
+    font-size: var(--text-5xl);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.04em;
+    line-height: var(--leading-tight);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-5);
+  }
+
+  @media (max-width: 640px) {
+    .hero__name {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .hero__bio {
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 52ch;
+    margin-bottom: var(--space-8);
+  }
+
+  .hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    list-style: none;
+  }
+
+  .hero__link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .hero__link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-emphasis);
+    border-color: var(--color-border-emphasis);
+  }
+
+  .hero__link--primary {
+    color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
+    border-color: transparent;
+  }
+
+  .hero__link--primary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
+    border-color: transparent;
+  }
+
+  .hero__avatar-wrap {
+    flex-shrink: 0;
+  }
+
+  .hero__avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (max-width: 640px) {
+    .hero__avatar {
+      width: 96px;
+      height: 96px;
+    }
+  }
+</style>

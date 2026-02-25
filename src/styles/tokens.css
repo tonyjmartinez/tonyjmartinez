@@ -1,0 +1,127 @@
+/**
+ * Design tokens — all site-wide values live here as CSS custom properties.
+ * Components and layouts reference these rather than hardcoding values.
+ */
+
+:root {
+  /* ——— Colors ——— */
+  --color-bg: #0f1117;
+  --color-bg-subtle: #1a1d27;
+  --color-bg-emphasis: #242838;
+  --color-surface: #1e2130;
+
+  --color-text-primary: #e8eaf0;
+  --color-text-secondary: #9ba3b8;
+  --color-text-muted: #6b7590;
+  --color-text-inverse: #0f1117;
+
+  --color-accent: #6c8cff;
+  --color-accent-hover: #8aa3ff;
+  --color-accent-subtle: rgba(108, 140, 255, 0.12);
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-emphasis: rgba(255, 255, 255, 0.16);
+
+  /* Semantic / status colors */
+  --color-info: #6c8cff;
+  --color-info-bg: rgba(108, 140, 255, 0.1);
+  --color-warning: #f5b84e;
+  --color-warning-bg: rgba(245, 184, 78, 0.1);
+  --color-success: #4ec98a;
+  --color-success-bg: rgba(78, 201, 138, 0.1);
+  --color-danger: #ff6b6b;
+  --color-danger-bg: rgba(255, 107, 107, 0.1);
+
+  /* NBA brand colors */
+  --color-nba-lakers: #552583;
+  --color-nba-celtics: #007a33;
+  --color-nba-mavs: #00538c;
+  --color-nba-thunder: #007ac1;
+
+  /* ——— Typography ——— */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* ——— Spacing ——— */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ——— Border radius ——— */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ——— Shadows ——— */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  /* ——— Transitions ——— */
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 350ms ease;
+
+  /* ——— Layout ——— */
+  --max-width-prose: 68ch;
+  --max-width-content: 860px;
+  --max-width-wide: 1100px;
+
+  --header-height: 64px;
+}
+
+/* Light mode (opt-in via data attribute if needed later) */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #fafbfc;
+    --color-bg-subtle: #f3f4f8;
+    --color-bg-emphasis: #e8eaf0;
+    --color-surface: #ffffff;
+
+    --color-text-primary: #1a1d27;
+    --color-text-secondary: #4a5068;
+    --color-text-muted: #767d96;
+    --color-text-inverse: #fafbfc;
+
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-border-emphasis: rgba(0, 0, 0, 0.16);
+    --color-accent-subtle: rgba(108, 140, 255, 0.08);
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+}
