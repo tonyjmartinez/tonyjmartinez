@@ -17,32 +17,33 @@ const formattedDate = publishDate.toLocaleDateString("en-US", {
 ---
 
 <article class="blog-card">
-  <a href={`/blog/${post.id}`} class="blog-card__link" aria-label={title}>
-    <div class="blog-card__content">
-      {
-        tags.length > 0 && (
-          <ul class="blog-card__tags" role="list" aria-label="Post tags">
-            {tags.map((tag) => (
-              <li>
-                <TagPill tag={tag} />
-              </li>
-            ))}
-          </ul>
-        )
-      }
+  <div class="blog-card__content">
+    {
+      tags.length > 0 && (
+        <ul class="blog-card__tags" role="list" aria-label="Post tags">
+          {tags.map((tag) => (
+            <li>
+              <TagPill tag={tag} />
+            </li>
+          ))}
+        </ul>
+      )
+    }
 
-      <h2 class="blog-card__title">{title}</h2>
-      <p class="blog-card__description">{description}</p>
+    <h2 class="blog-card__title">
+      <a href={`/blog/${post.id}`} class="blog-card__link">{title}</a>
+    </h2>
+    <p class="blog-card__description">{description}</p>
 
-      <time class="blog-card__date" datetime={publishDate.toISOString()}>
-        {formattedDate}
-      </time>
-    </div>
-  </a>
+    <time class="blog-card__date" datetime={publishDate.toISOString()}>
+      {formattedDate}
+    </time>
+  </div>
 </article>
 
 <style>
   .blog-card {
+    position: relative;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -54,11 +55,20 @@ const formattedDate = publishDate.toLocaleDateString("en-US", {
     box-shadow: var(--shadow-md);
   }
 
-  .blog-card__link {
-    display: block;
+  .blog-card__content {
     padding: var(--space-6);
+  }
+
+  .blog-card__link {
     text-decoration: none;
     color: inherit;
+  }
+
+  /* Stretch the link to cover the whole card */
+  .blog-card__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
   }
 
   .blog-card__tags {
@@ -67,6 +77,8 @@ const formattedDate = publishDate.toLocaleDateString("en-US", {
     gap: var(--space-2);
     list-style: none;
     margin-bottom: var(--space-3);
+    position: relative;
+    z-index: 1;
   }
 
   .blog-card__title {
