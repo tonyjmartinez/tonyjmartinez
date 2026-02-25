@@ -1,0 +1,24 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@layouts/Header.astro";
+import Footer from "@layouts/Footer.astro";
+import Hero from "@components/home/Hero.astro";
+import FeaturedPosts from "@components/home/FeaturedPosts.astro";
+import { getRecentPosts } from "@lib/blog";
+
+const recentPosts = await getRecentPosts(3);
+---
+
+<BaseLayout
+  title="Tony Martinez"
+  description="Software engineer who loves building things for the web. Writing about basketball, React, and whatever else is on my mind."
+>
+  <Header />
+
+  <main id="main-content">
+    <Hero />
+    <FeaturedPosts posts={recentPosts} />
+  </main>
+
+  <Footer />
+</BaseLayout>

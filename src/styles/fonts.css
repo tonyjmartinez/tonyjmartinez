@@ -1,0 +1,22 @@
+/**
+ * Font loading
+ *
+ * All fonts are referenced via CSS variables in tokens.css.
+ * The site defaults to system fonts — no web fonts are loaded initially,
+ * so there is zero font-induced layout shift.
+ *
+ * To add custom fonts:
+ * 1. Place font files in /public/fonts/
+ * 2. Add @font-face declarations here
+ * 3. Use `font-display: optional` to prevent FOIT on slow connections
+ *
+ * Example:
+ *
+ * @font-face {
+ *   font-family: "Inter";
+ *   font-style: normal;
+ *   font-weight: 100 900;
+ *   font-display: optional;
+ *   src: url("/fonts/inter-variable.woff2") format("woff2");
+ * }
+ */

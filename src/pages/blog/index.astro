@@ -1,0 +1,124 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "@layouts/Header.astro";
+import Footer from "@layouts/Footer.astro";
+import BlogCard from "@components/blog/BlogCard.astro";
+import TagPill from "@components/blog/TagPill.astro";
+import { getAllPosts, getAllTags } from "@lib/blog";
+
+const posts = await getAllPosts();
+const tags = await getAllTags();
+---
+
+<BaseLayout
+  title="Blog"
+  description="Writing about basketball, React, performance, and whatever else is on my mind."
+>
+  <Header />
+
+  <main id="main-content">
+    <div class="container">
+      <header class="page-header">
+        <h1 class="page-header__title">Blog</h1>
+        <p class="page-header__description">
+          {posts.length} post{posts.length !== 1 ? "s" : ""} so far.
+        </p>
+      </header>
+
+      {
+        tags.length > 0 && (
+          <nav aria-label="Filter posts by tag" class="tag-filter">
+            <p class="tag-filter__label" id="tag-filter-label">
+              Browse by tag
+            </p>
+            <ul
+              class="tag-filter__list"
+              role="list"
+              aria-labelledby="tag-filter-label"
+            >
+              {tags.map((tag) => (
+                <li>
+                  <TagPill tag={tag} />
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+
+      {
+        posts.length > 0 ? (
+          <ul class="post-list" role="list" aria-label="Blog posts">
+            {posts.map((post) => (
+              <li>
+                <BlogCard post={post} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty-state">No posts yet — check back soon.</p>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-8);
+  }
+
+  .page-header__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-2);
+  }
+
+  .page-header__description {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+  }
+
+  .tag-filter {
+    margin-bottom: var(--space-8);
+    padding: var(--space-5);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .tag-filter__label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .tag-filter__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+
+  .post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: var(--space-5);
+    list-style: none;
+    padding-bottom: var(--space-20);
+  }
+
+  .empty-state {
+    padding-block: var(--space-20);
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+  }
+</style>
