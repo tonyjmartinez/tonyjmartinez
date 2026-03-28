@@ -15,16 +15,16 @@
   --color-text-muted: #6b7590;
   --color-text-inverse: #0f1117;
 
-  --color-accent: #6c8cff;
-  --color-accent-hover: #8aa3ff;
-  --color-accent-subtle: rgba(108, 140, 255, 0.12);
+  --color-accent: #c94040;
+  --color-accent-hover: #e05555;
+  --color-accent-subtle: rgba(201, 64, 64, 0.12);
 
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-emphasis: rgba(255, 255, 255, 0.16);
 
   /* Semantic / status colors */
-  --color-info: #6c8cff;
-  --color-info-bg: rgba(108, 140, 255, 0.1);
+  --color-info: #c94040;
+  --color-info-bg: rgba(201, 64, 64, 0.1);
   --color-warning: #f5b84e;
   --color-warning-bg: rgba(245, 184, 78, 0.1);
   --color-success: #4ec98a;
@@ -118,7 +118,7 @@
 
     --color-border: rgba(0, 0, 0, 0.08);
     --color-border-emphasis: rgba(0, 0, 0, 0.16);
-    --color-accent-subtle: rgba(108, 140, 255, 0.08);
+    --color-accent-subtle: rgba(201, 64, 64, 0.08);
 
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
