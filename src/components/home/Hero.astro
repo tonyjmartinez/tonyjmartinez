@@ -82,19 +82,39 @@ const socialLinks = [
   }
 
   .hero__eyebrow {
-    font-size: var(--text-base);
+    font-size: var(--text-lg);
     color: var(--color-text-muted);
     font-weight: var(--font-medium);
     margin-bottom: var(--space-2);
   }
 
+  @keyframes polychrome {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .hero__name {
-    font-size: var(--text-5xl);
+    font-size: var(--text-6xl);
     font-weight: var(--font-bold);
     letter-spacing: -0.04em;
     line-height: var(--leading-tight);
-    color: var(--color-text-primary);
     margin-bottom: var(--space-5);
+    background: linear-gradient(
+      120deg,
+      #800020,
+      #c0152a,
+      #e8453c,
+      #f4913a,
+      #f0c040,
+      #c8304a,
+      #800020
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: polychrome 5s ease infinite;
   }
 
   @media (max-width: 640px) {
@@ -104,7 +124,7 @@ const socialLinks = [
   }
 
   .hero__bio {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
     max-width: 52ch;
