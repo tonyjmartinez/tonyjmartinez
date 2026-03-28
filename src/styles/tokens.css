@@ -5,26 +5,26 @@
 
 :root {
   /* ——— Colors ——— */
-  --color-bg: #0f1117;
-  --color-bg-subtle: #1a1d27;
-  --color-bg-emphasis: #242838;
-  --color-surface: #1e2130;
+  --color-bg: #110a0b;
+  --color-bg-subtle: #1c1012;
+  --color-bg-emphasis: #2a1518;
+  --color-surface: #1f1214;
 
   --color-text-primary: #e8eaf0;
-  --color-text-secondary: #9ba3b8;
-  --color-text-muted: #6b7590;
-  --color-text-inverse: #0f1117;
+  --color-text-secondary: #b8a3a6;
+  --color-text-muted: #8a6b70;
+  --color-text-inverse: #110a0b;
 
-  --color-accent: #c94040;
-  --color-accent-hover: #e05555;
-  --color-accent-subtle: rgba(201, 64, 64, 0.12);
+  --color-accent: #800020;
+  --color-accent-hover: #9e0025;
+  --color-accent-subtle: rgba(128, 0, 32, 0.15);
 
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-emphasis: rgba(255, 255, 255, 0.16);
 
   /* Semantic / status colors */
-  --color-info: #c94040;
-  --color-info-bg: rgba(201, 64, 64, 0.1);
+  --color-info: #800020;
+  --color-info-bg: rgba(128, 0, 32, 0.1);
   --color-warning: #f5b84e;
   --color-warning-bg: rgba(245, 184, 78, 0.1);
   --color-success: #4ec98a;
@@ -106,19 +106,22 @@
 /* Light mode (opt-in via data attribute if needed later) */
 @media (prefers-color-scheme: light) {
   :root {
-    --color-bg: #fafbfc;
-    --color-bg-subtle: #f3f4f8;
-    --color-bg-emphasis: #e8eaf0;
+    --color-bg: #fdf8f8;
+    --color-bg-subtle: #f7eeef;
+    --color-bg-emphasis: #eedcde;
     --color-surface: #ffffff;
 
-    --color-text-primary: #1a1d27;
-    --color-text-secondary: #4a5068;
-    --color-text-muted: #767d96;
-    --color-text-inverse: #fafbfc;
+    --color-text-primary: #1a0d0f;
+    --color-text-secondary: #5a3a3f;
+    --color-text-muted: #8a6b70;
+    --color-text-inverse: #fdf8f8;
+
+    --color-accent: #800020;
+    --color-accent-hover: #6a001a;
+    --color-accent-subtle: rgba(128, 0, 32, 0.08);
 
     --color-border: rgba(0, 0, 0, 0.08);
     --color-border-emphasis: rgba(0, 0, 0, 0.16);
-    --color-accent-subtle: rgba(201, 64, 64, 0.08);
 
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
