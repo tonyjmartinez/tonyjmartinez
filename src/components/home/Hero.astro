@@ -41,17 +41,6 @@ const socialLinks = [
       </nav>
     </div>
 
-    <div class="hero__avatar-wrap" aria-hidden="true">
-      <img
-        src="/images/avatar.svg"
-        alt="Tony Martinez"
-        class="hero__avatar"
-        width="200"
-        height="200"
-        loading="eager"
-        decoding="sync"
-      />
-    </div>
   </div>
 </section>
 
@@ -66,14 +55,6 @@ const socialLinks = [
     align-items: center;
     justify-content: space-between;
     gap: var(--space-12);
-  }
-
-  @media (max-width: 640px) {
-    .hero__inner {
-      flex-direction: column-reverse;
-      align-items: flex-start;
-      gap: var(--space-8);
-    }
   }
 
   .hero__text {
@@ -173,23 +154,5 @@ const socialLinks = [
     border-color: transparent;
   }
 
-  .hero__avatar-wrap {
-    flex-shrink: 0;
-  }
 
-  .hero__avatar {
-    width: 180px;
-    height: 180px;
-    border-radius: var(--radius-full);
-    object-fit: cover;
-    border: 3px solid var(--color-border);
-    box-shadow: var(--shadow-lg);
-  }
-
-  @media (max-width: 640px) {
-    .hero__avatar {
-      width: 96px;
-      height: 96px;
-    }
-  }
 </style>
