@@ -1,0 +1,272 @@
+/* Rosette component classes, trimmed to the components this site uses. */
+
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-bg: var(--surface);
+  --btn-fg: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 3rem;
+  max-width: 100%;
+  padding: 0.65em 1.4em;
+  font: inherit;
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-size: var(--step-0);
+  line-height: 1.1;
+  text-decoration: none;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  border: var(--border) solid var(--line);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--shadow);
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow);
+}
+
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--shadow);
+}
+
+.btn-primary {
+  --btn-bg: var(--bloom);
+  --btn-fg: var(--on-accent);
+}
+
+.btn-ink {
+  --btn-bg: var(--text);
+  --btn-fg: var(--paper);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ---------- Cards & tiles ---------- */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--lift) var(--lift) 0 var(--shadow);
+}
+
+.tile {
+  border: var(--border) solid var(--ink);
+  border-radius: var(--radius);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.2em 0.75em;
+  font-size: var(--step--1);
+  font-weight: 700;
+  line-height: 1.4;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.chip svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.chip-list li {
+  margin: 0;
+}
+
+/* Responsive card grid */
+.grid {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.grid > li {
+  margin: 0;
+}
+
+/* Whole-card link pattern: one real link, stretched over the card. */
+.card-link {
+  text-decoration: none;
+}
+
+.card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card:has(.card-link) {
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.card:has(.card-link:hover) {
+  transform: translate(-3px, -3px);
+  box-shadow: calc(var(--lift) + 3px) calc(var(--lift) + 3px) 0 var(--shadow);
+}
+
+.card:has(.card-link:focus-visible) {
+  outline: 4px solid var(--focus-ring);
+  outline-offset: 4px;
+  box-shadow:
+    var(--lift) var(--lift) 0 var(--shadow),
+    0 0 0 12px var(--focus);
+}
+
+.card-link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  --btn-bg: var(--surface);
+  --btn-fg: var(--text);
+}
+
+.btn-sm {
+  min-height: 2.75rem;
+  padding: 0.45em 1em;
+  font-size: var(--step--1);
+  box-shadow: var(--lift-sm) var(--lift-sm) 0 var(--shadow);
+}
+
+.btn-lg {
+  min-height: 3.5rem;
+  padding: 0.75em 1.75em;
+  font-size: var(--step-1);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn[aria-disabled='true'],
+.btn:disabled {
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  border-style: dashed;
+}
+
+/* ---------- Chip variants ---------- */
+.chip-ink {
+  background: var(--text);
+  color: var(--paper);
+  border-color: var(--text);
+}
+
+.chip.on-tone {
+  border-color: var(--ink);
+}
+
+/* ---------- Tones (last, so they win over .card backgrounds) ---------- */
+.tone-bloom {
+  --tone: var(--bloom);
+}
+.tone-sun {
+  --tone: var(--sun);
+}
+.tone-mint {
+  --tone: var(--mint);
+}
+.tone-lilac {
+  --tone: var(--lilac);
+}
+.tone-coral {
+  --tone: var(--coral);
+}
+
+/* A colour block is a light-theme island in both themes: every token inside resolves to dark ink on light. */
+.on-tone {
+  background: var(--tone);
+  color: var(--on-accent);
+  --text: var(--ink);
+  --text-muted: var(--ink);
+  --paper: #fff7e8;
+  --surface: #ffffff;
+  --line: var(--ink);
+  --shadow: var(--ink);
+  --focus-ring: var(--ink);
+}
+
+.on-tone a:not(.btn) {
+  text-decoration-color: currentColor;
+}
+
+.icon {
+  flex: none;
+}
+
+/* ---------- Page header band ---------- */
+.page-head {
+  border-bottom: var(--border) solid var(--line);
+  padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem);
+}
+
+.page-head h1 {
+  max-width: 18ch;
+}
+
+.page-head-grid {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 52rem) {
+  .page-head-grid {
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+
+.page-head-text {
+  min-width: 0;
+}
+
+.page-head-art {
+  width: 100%;
+  max-width: 16rem;
+  margin-inline: auto;
+}
+
+.page-head-art.art-badge {
+  max-width: 22rem;
+  padding: var(--space-5) var(--space-6);
+  background: #fff7e8;
+  border: var(--border) solid var(--ink);
+  border-radius: 50%;
+  box-shadow: var(--lift-lg) var(--lift-lg) 0 var(--ink);
+}

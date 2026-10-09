@@ -1,0 +1,76 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/atkinson-hyperlegible-next';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#fff7e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d1912" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>© {new Date().getFullYear()} Tony Martinez</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -10rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    background: var(--sun);
+    color: var(--on-accent);
+    font-weight: 800;
+    border: var(--border) solid var(--ink);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
+  .site-footer {
+    padding-block: var(--space-5);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+
+  .site-footer p {
+    margin: 0;
+  }
+</style>

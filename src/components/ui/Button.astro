@@ -1,0 +1,55 @@
+---
+/**
+ * Button — chunky pill with a hard "sticker" shadow.
+ * Renders a link when `href` is set, otherwise a <button>.
+ *
+ * <Button href="/plants/" variant="primary" iconAfter="arrow">Find your plant</Button>
+ */
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary' | 'ink';
+  size?: 'sm' | 'md' | 'lg';
+  /** Icon before the label. */
+  icon?: IconName;
+  /** Icon after the label, e.g. "arrow" for links that move forward. */
+  iconAfter?: IconName;
+  /** Stretch to the full width of its container. */
+  block?: boolean;
+  class?: string;
+  [attr: string]: unknown;
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'secondary',
+  size = 'md',
+  icon,
+  iconAfter,
+  block = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const classes = ['btn', `btn-${variant}`, size !== 'md' && `btn-${size}`, block && 'btn-block', className];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} {...rest}>
+      {icon && <Icon name={icon} />}
+      <slot />
+      {iconAfter && <Icon name={iconAfter} />}
+    </a>
+  ) : (
+    <button type={type} class:list={classes} {...rest}>
+      {icon && <Icon name={icon} />}
+      <slot />
+      {iconAfter && <Icon name={iconAfter} />}
+    </button>
+  )
+}

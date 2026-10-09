@@ -1,0 +1,32 @@
+---
+/**
+ * Small line icons. Decorative by default (aria-hidden); pass `label` to expose one to assistive tech.
+ */
+import { iconPaths, type IconName } from './icons';
+
+interface Props {
+  name: IconName;
+  label?: string;
+  class?: string;
+  size?: string;
+}
+
+const { name, label, class: className, size = '1.25em' } = Astro.props;
+---
+
+<svg
+  class:list={['icon', className]}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.25"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={label ? undefined : 'true'}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  focusable="false"
+  set:html={iconPaths[name]}
+/>

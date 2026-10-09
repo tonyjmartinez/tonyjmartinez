@@ -1,0 +1,42 @@
+---
+/**
+ * PageHeader — the colour-blocked band at the top of every page.
+ * Optional breadcrumbs, an "art" slot for an illustration, and a default slot for extras under the lede.
+ */
+import Breadcrumbs from './Breadcrumbs.astro';
+import type { Tone } from '@/data/taxonomy';
+
+interface Props {
+  title: string;
+  tone: Tone;
+  eyebrow?: string;
+  lede?: string;
+  crumbs?: { href?: string; label: string }[];
+  /** "plain" shows the art as-is; "badge" puts it in a cream circle. */
+  artStyle?: 'plain' | 'badge';
+  class?: string;
+  [attr: string]: unknown;
+}
+
+const { title, tone, eyebrow, lede, crumbs, artStyle = 'plain', class: className, ...rest } = Astro.props;
+const hasArt = Astro.slots.has('art');
+---
+
+<header class:list={['page-head on-tone', `tone-${tone}`, className]} {...rest}>
+  <div class:list={['wrap', hasArt && 'page-head-grid']}>
+    <div class="page-head-text">
+      {crumbs && <Breadcrumbs items={crumbs} />}
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {lede && <p class="lede">{lede}</p>}
+      <slot />
+    </div>
+    {
+      hasArt && (
+        <div class:list={['page-head-art', `art-${artStyle}`]} aria-hidden="true">
+          <slot name="art" />
+        </div>
+      )
+    }
+  </div>
+</header>

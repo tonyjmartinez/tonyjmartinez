@@ -1,0 +1,25 @@
+---
+/**
+ * Chip — a small pill for facts and statuses.
+ * Always pair colour with words: the label carries the meaning, colour only reinforces it.
+ */
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+import type { Tone } from '@/data/taxonomy';
+
+interface Props {
+  /** "plain" (outlined), "ink" (inverted), or an accent tone. */
+  variant?: 'plain' | 'ink' | Tone;
+  icon?: IconName;
+  class?: string;
+  [attr: string]: unknown;
+}
+
+const { variant = 'plain', icon, class: className, ...rest } = Astro.props;
+const tone = variant !== 'plain' && variant !== 'ink' ? variant : undefined;
+---
+
+<span class:list={['chip', variant === 'ink' && 'chip-ink', tone && ['on-tone', `tone-${tone}`], className]} {...rest}>
+  {icon && <Icon name={icon} />}
+  <slot />
+</span>
