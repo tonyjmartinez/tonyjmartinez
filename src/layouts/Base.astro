@@ -10,6 +10,15 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Tony Martinez',
+  url: Astro.site?.href,
+  jobTitle: 'Software engineer',
+  description,
+  sameAs: ['https://github.com/tonyjmartinez'],
+};
 ---
 
 <!doctype html>
@@ -31,6 +40,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>
+      // Apply a saved theme before first paint to avoid a flash.
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -40,8 +57,34 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <footer class="site-footer">
       <div class="wrap">
         <p>© {new Date().getFullYear()} Tony Martinez</p>
+        <button type="button" class="theme-toggle" aria-pressed="false">
+          <span class="theme-label">Dark theme</span>
+        </button>
       </div>
     </footer>
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var btn = document.querySelector('.theme-toggle');
+        var label = btn.querySelector('.theme-label');
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        function isDark() {
+          var t = root.dataset.theme;
+          return t ? t === 'dark' : mq.matches;
+        }
+        function sync() {
+          btn.setAttribute('aria-pressed', String(isDark()));
+        }
+        btn.addEventListener('click', function () {
+          var next = isDark() ? 'light' : 'dark';
+          root.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch (e) {}
+          sync();
+        });
+        mq.addEventListener('change', sync);
+        sync();
+      })();
+    </script>
   </body>
 </html>
 
@@ -74,7 +117,41 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     color: var(--text-muted);
   }
 
+  .site-footer .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
   .site-footer p {
     margin: 0;
+  }
+
+  .theme-toggle {
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: var(--border-thin) solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 0.35rem 1rem;
+    cursor: pointer;
+    box-shadow: var(--lift-sm) var(--lift-sm) 0 var(--shadow);
+  }
+
+  .theme-toggle[aria-pressed='true'] .theme-label::after {
+    content: ': on';
+  }
+
+  .theme-toggle[aria-pressed='false'] .theme-label::after {
+    content: ': off';
+  }
+
+  @media print {
+    .theme-toggle,
+    .skip-link {
+      display: none;
+    }
   }
 </style>
