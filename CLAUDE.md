@@ -5,6 +5,7 @@ Single page: `src/pages/index.astro`; layout `src/layouts/Base.astro`; tokens in
 Goal of the routine: improve capabilities, polish and professionalism WITHOUT adding much content. Verify with `npm run build` (and `npm run check`) before committing. Don't open PRs unless asked; push to the designated branch.
 
 ## Log (newest first)
+- 2026-10-23 (hourly run): Added Cross-Origin-Resource-Policy: same-origin header. Reduced-motion + forced-colors already handled in base.css. Site is at diminishing returns; remaining backlog needs owner input or a real PNG.
 - 2026-10-23 (hourly run): Added Content-Security-Policy to public/_headers (self-only; inline script/style allowed for theme script + Astro styles). If external fonts/analytics/images are ever added, update the CSP.
 - 2026-10-23 (hourly run): Added /.well-known/security.txt (contact = LinkedIn; Expires 2027-10-23 — renew before then). Remaining: OG PNG, axe pass, resume/email.
 - 2026-10-23 (owner asked to use LinkedIn for inspiration): Public profile (linkedin.com/in/tonyjmartinez) confirms bio already matches (9 yrs, accessibility). Added LinkedIn button + JSON-LD sameAs. Profile also lists tonyjmartinez.com and 23vs23.com; employer shown is Vanta but NOT added to site (owner hasn't asked). Remaining: OG PNG, axe pass, resume/email.
