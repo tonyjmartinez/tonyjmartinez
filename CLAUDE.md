@@ -5,6 +5,7 @@ Single page: `src/pages/index.astro`; layout `src/layouts/Base.astro`; tokens in
 Goal of the routine: improve capabilities, polish and professionalism WITHOUT adding much content. Verify with `npm run build` (and `npm run check`) before committing. Don't open PRs unless asked; push to the designated branch.
 
 ## Log (newest first)
+- 2026-10-23 (owner asked to use LinkedIn for inspiration): Public profile (linkedin.com/in/tonyjmartinez) confirms bio already matches (9 yrs, accessibility). Added LinkedIn button + JSON-LD sameAs. Profile also lists tonyjmartinez.com and 23vs23.com; employer shown is Vanta but NOT added to site (owner hasn't asked). Remaining: OG PNG, axe pass, resume/email.
 - 2026-10-23 (later): Added COOP + HSTS headers and author meta. Site is quite polished; remaining backlog items need owner input or a real PNG.
 - 2026-10-23: Print stylesheet (plain ink, hides toggle/skip link, shows link URLs). Focus ring reviewed: ink ring + yellow halo on light; cream ring on dark paper — acceptable.
 - 2026-10-22 (later): Web manifest, `public/_headers` (security + immutable asset cache headers), color-scheme meta, theme toggle hidden until JS runs (no dead button).
@@ -13,4 +14,4 @@ Goal of the routine: improve capabilities, polish and professionalism WITHOUT ad
 ## Ideas backlog
 - Social/OG image (needs a real PNG; summary card is used now)
 - Lighthouse/a11y pass with Playwright + axe
-- Add a link to resume/LinkedIn/email once the owner supplies them (do not invent)
+- Add a link to resume/email once the owner supplies them (do not invent)
