@@ -5,6 +5,7 @@ Single page: `src/pages/index.astro`; layout `src/layouts/Base.astro`; tokens in
 Goal of the routine: improve capabilities, polish and professionalism WITHOUT adding much content. Verify with `npm run build` (and `npm run check`) before committing. Don't open PRs unless asked; push to the designated branch.
 
 ## Log (newest first)
+- 2026-10-23 (later): Added COOP + HSTS headers and author meta. Site is quite polished; remaining backlog items need owner input or a real PNG.
 - 2026-10-23: Print stylesheet (plain ink, hides toggle/skip link, shows link URLs). Focus ring reviewed: ink ring + yellow halo on light; cream ring on dark paper — acceptable.
 - 2026-10-22 (later): Web manifest, `public/_headers` (security + immutable asset cache headers), color-scheme meta, theme toggle hidden until JS runs (no dead button).
 - 2026-10-22: Added footer light/dark theme toggle (persisted, no-flash inline script), JSON-LD Person data, 404 page, sitemap.xml + robots sitemap link, this file.
