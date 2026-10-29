@@ -8,22 +8,29 @@ const bio =
 
 const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
 
-// Each entry mirrors the README of the public repository it links to.
+// Each entry links only to a verified public page. `href` is omitted when there is no public link yet.
 const work = [
+  {
+    title: 'Succulents.info',
+    href: 'https://succulents.info/',
+    status: 'Coming soon',
+    summary: 'Plain-language succulent care guides, a plant library, and a symptom-led plant doctor.',
+    tags: ['Astro', 'Static site'],
+    tone: 'tone-bloom',
+  },
   {
     title: 'Tone Zone Survivors',
     href: 'https://github.com/tonyjmartinez/tonezone-survivor',
-    summary:
-      'A browser action game built with plain HTML5 canvas and no build step.',
+    status: 'Source on GitHub',
+    summary: 'A browser action game built with plain HTML5 canvas and no build step.',
     tags: ['JavaScript', 'HTML5 canvas'],
     tone: 'tone-mint',
   },
   {
-    title: 'Agent vs Agent',
-    href: 'https://github.com/tonyjmartinez/agent-vs-agent',
-    summary:
-      'A browser board game for phone and desktop, built with TypeScript and Vite.',
-    tags: ['TypeScript', 'Vite'],
+    title: 'Garden Defense',
+    status: 'In development',
+    summary: 'A browser game in development. A public link will be added once it is ready.',
+    tags: ['Phaser'],
     tone: 'tone-sun',
   },
 ];
@@ -50,15 +57,16 @@ const work = [
 
   <section id="work" class="work" aria-labelledby="work-title">
     <h2 id="work-title">Selected work</h2>
-    <p class="work-intro">Public projects, with source code on GitHub.</p>
+    <p class="work-intro">Projects I am building. Live links and source are shown only where they are public.</p>
     <ul class="grid work-grid">
       {
         work.map((w) => (
           <li>
             <article class={`card work-card ${w.tone}`}>
               <h3>
-                <a class="card-link" href={w.href}>{w.title}</a>
+                {w.href ? <a class="card-link" href={w.href}>{w.title}</a> : w.title}
               </h3>
+              <p class="work-status">{w.status}</p>
               <p>{w.summary}</p>
               <ul class="chip-list" aria-label="Built with">
                 {w.tags.map((t) => (
@@ -125,6 +133,11 @@ const work = [
 
   .work-card p {
     margin: 0;
+  }
+
+  .work-status {
+    font-size: var(--step--1);
+    font-weight: 700;
   }
 
   .work-card .chip-list {

@@ -71,9 +71,10 @@ test('external target=_blank links use rel noopener', () => {
   }
 });
 
-test('Selected work section links to both project repos', () => {
+test('Selected work section links to public projects only', () => {
   const html = read('index.html');
   assert.match(html, /<section id="work"[^>]*aria-labelledby="work-title"/);
   assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/tonezone-survivor"/);
-  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/agent-vs-agent"/);
+  assert.match(html, /href="https:\/\/succulents\.info\/"/);
+  assert.doesNotMatch(html, /phaser-game|agent-vs-agent/);
 });
