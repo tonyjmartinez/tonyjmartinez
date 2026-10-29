@@ -7,6 +7,26 @@ const bio =
   'Software engineer with 9 years of experience focused on frontend and accessibility. I enjoy working at the intersection of engineering, product, and design to build engaging, accessible user experiences.';
 
 const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
+
+// Each entry mirrors the README of the public repository it links to.
+const work = [
+  {
+    title: 'Tone Zone Survivors',
+    href: 'https://github.com/tonyjmartinez/tonezone-survivor',
+    summary:
+      'A Vampire Survivors-style action game in plain HTML5 canvas. Move with keyboard or touch, weapons fire automatically, and you pick upgrades on level-up.',
+    tags: ['JavaScript', 'HTML5 canvas', 'No build step'],
+    tone: 'tone-mint',
+  },
+  {
+    title: 'Agent vs Agent',
+    href: 'https://github.com/tonyjmartinez/agent-vs-agent',
+    summary:
+      'A bump-and-run spy board game for phone and desktop browsers, with 18 tactical puzzle missions. Deployed as a Cloudflare Worker.',
+    tags: ['TypeScript', 'Vite', 'Cloudflare Workers'],
+    tone: 'tone-sun',
+  },
+];
 ---
 
 <Base title="Tony Martinez · Frontend and accessibility engineer" description={bio}>
@@ -21,11 +41,38 @@ const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
       }
     </ul>
     <div class="btn-row">
-      <Button href="https://github.com/tonyjmartinez" variant="primary" size="lg" iconAfter="arrow">GitHub</Button>
+      <Button href="#work" variant="primary" size="lg" iconAfter="arrow">Selected work</Button>
+      <Button href="https://github.com/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">GitHub</Button>
       <Button href="https://www.linkedin.com/in/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">LinkedIn</Button>
     </div>
     <PlantArt slot="art" kind="rosette" leaf="#9ccfc4" tip="#ff86ad" />
   </PageHeader>
+
+  <section id="work" class="work" aria-labelledby="work-title">
+    <h2 id="work-title">Selected work</h2>
+    <p class="work-intro">Public projects, with source code on GitHub.</p>
+    <ul class="grid work-grid">
+      {
+        work.map((w) => (
+          <li>
+            <article class={`card work-card ${w.tone}`}>
+              <h3>
+                <a class="card-link" href={w.href}>{w.title}</a>
+              </h3>
+              <p>{w.summary}</p>
+              <ul class="chip-list" aria-label="Built with">
+                {w.tags.map((t) => (
+                  <li>
+                    <Chip>{t}</Chip>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </Base>
 
 <style>
@@ -48,5 +95,39 @@ const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
 
   .focus {
     margin: var(--space-5) 0 var(--space-6);
+  }
+
+  .work {
+    padding: var(--space-8) 0 var(--space-7);
+  }
+
+  .work h2 {
+    margin-bottom: var(--space-2);
+  }
+
+  .work-intro {
+    margin: 0 0 var(--space-6);
+    max-width: 52ch;
+  }
+
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 100%;
+    padding: var(--space-5);
+    border-top: 0.6rem solid var(--tone);
+  }
+
+  .work-card h3 {
+    margin: 0;
+  }
+
+  .work-card p {
+    margin: 0;
+  }
+
+  .work-card .chip-list {
+    margin-top: auto;
   }
 </style>
