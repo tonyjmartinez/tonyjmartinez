@@ -78,5 +78,6 @@ test('Selected work section links to public workers.dev deployments only', () =>
     assert.match(html, new RegExp(`href="https://${u}\\.ajosephmartinez\\.workers\\.dev/"`));
   }
   assert.doesNotMatch(html, /github\.com\/tonyjmartinez\/phaser-game/);
+  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/tonezone-survivor"[^>]*>Source code on GitHub/);
   assert.doesNotMatch(html, /agent-vs-agent/);
 });
