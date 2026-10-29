@@ -8,11 +8,11 @@ const bio =
 
 const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
 
-// Each entry links only to a verified public page. `href` is omitted when there is no public link yet.
+// Each card links to its playable deployment (workers.dev). Private repositories are never linked.
 const work = [
   {
     title: 'Succulents.info',
-    href: 'https://succulents.info/',
+    href: 'https://succulents-info.ajosephmartinez.workers.dev/',
     status: 'Coming soon',
     summary: 'Plain-language succulent care guides, a plant library, and a symptom-led plant doctor.',
     tags: ['Astro', 'Static site'],
@@ -20,16 +20,17 @@ const work = [
   },
   {
     title: 'Tone Zone Survivors',
-    href: 'https://github.com/tonyjmartinez/tonezone-survivor',
-    status: 'Source on GitHub',
+    href: 'https://tonezone-survivor.ajosephmartinez.workers.dev/',
+    status: 'Playable in browser',
     summary: 'A browser action game built with plain HTML5 canvas and no build step.',
     tags: ['JavaScript', 'HTML5 canvas'],
     tone: 'tone-mint',
   },
   {
     title: 'Garden Defense',
+    href: 'https://phaser-game.ajosephmartinez.workers.dev/',
     status: 'In development',
-    summary: 'A browser game in development. A public link will be added once it is ready.',
+    summary: 'A browser game in development, built with Phaser.',
     tags: ['Phaser'],
     tone: 'tone-sun',
   },
@@ -57,7 +58,7 @@ const work = [
 
   <section id="work" class="work" aria-labelledby="work-title">
     <h2 id="work-title">Selected work</h2>
-    <p class="work-intro">Projects I am building. Live links and source are shown only where they are public.</p>
+    <p class="work-intro">Projects I am building. Each card opens the live version.</p>
     <ul class="grid work-grid">
       {
         work.map((w) => (
