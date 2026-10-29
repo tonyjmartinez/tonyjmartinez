@@ -70,3 +70,11 @@ test('external target=_blank links use rel noopener', () => {
     assert.match(tag, /rel="[^"]*noopener/, tag);
   }
 });
+
+test('Selected work section links to public projects only', () => {
+  const html = read('index.html');
+  assert.match(html, /<section id="work"[^>]*aria-labelledby="work-title"/);
+  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/tonezone-survivor"/);
+  assert.match(html, /href="https:\/\/succulents\.info\/"/);
+  assert.doesNotMatch(html, /phaser-game|agent-vs-agent/);
+});
