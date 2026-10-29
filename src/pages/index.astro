@@ -23,6 +23,7 @@ const work = [
     href: 'https://tonezone-survivor.ajosephmartinez.workers.dev/',
     status: 'Playable in browser',
     summary: 'A browser action game built with plain HTML5 canvas and no build step.',
+    source: 'https://github.com/tonyjmartinez/tonezone-survivor',
     tags: ['JavaScript', 'HTML5 canvas'],
     tone: 'tone-mint',
   },
@@ -76,6 +77,13 @@ const work = [
                   </li>
                 ))}
               </ul>
+              {
+                w.source && (
+                  <a class="work-source" href={w.source}>
+                    Source code on GitHub
+                  </a>
+                )
+              }
             </article>
           </li>
         ))
@@ -143,5 +151,16 @@ const work = [
 
   .work-card .chip-list {
     margin-top: auto;
+  }
+
+  /* Sits above the stretched card link so it is independently clickable. */
+  .work-source {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+    font-weight: 700;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
   }
 </style>
