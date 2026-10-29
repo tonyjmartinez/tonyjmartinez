@@ -4,33 +4,46 @@
 // is needed and nothing is left running afterwards.
 //
 // Usage: node scripts/visual-check.mjs [--widths 375,1280] [--out /tmp/visual]
-// Playwright is resolved from PLAYWRIGHT_MODULE (absolute path to the package's
-// index.mjs), else the pi-durable-browser cache. The browser is taken from
-// CHROMIUM (falls back to Playwright's bundled browser when unset).
-// Bare `import 'playwright'` does not honour NODE_PATH for ESM, so we import by path.
+// Playwright is imported from the project's dependencies. If that fails, set
+// PLAYWRIGHT_MODULE to an absolute path of the package's index.mjs (opt-in only;
+// nothing is loaded from a default location). The browser executable is taken
+// from CHROMIUM when set, otherwise Playwright's bundled browser is used.
+// Exit codes: 0 ok, 1 horizontal overflow, 2 Playwright or dist/ missing.
 import { createServer } from 'node:http';
 import { readFile, stat, mkdir } from 'node:fs/promises';
 import { extname, join, normalize, resolve } from 'node:path';
 import { existsSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const root = resolve(fileURLToPath(new URL('../dist/', import.meta.url)));
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
   const i = args.indexOf(name);
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
+const root = resolve(opt('--root', fileURLToPath(new URL('../dist/', import.meta.url))));
 const widths = opt('--widths', '375,1280').split(',').map(Number).filter(Boolean);
 const outDir = resolve(opt('--out', '/tmp/visual-check'));
 
-const playwrightPath =
-  process.env.PLAYWRIGHT_MODULE ||
-  '/home/tonyjmartinez/.cache/pi-durable-browser/node_modules/playwright/index.mjs';
-if (!existsSync(playwrightPath)) {
-  console.error(`Playwright not found at ${playwrightPath}. Set PLAYWRIGHT_MODULE.`);
+if (!existsSync(join(root, 'index.html'))) {
+  console.error(`No index.html in ${root}. Run "npm run build" first (or pass --root).`);
   process.exit(2);
 }
-const { chromium } = await import(pathToFileURL(playwrightPath).href);
+
+async function loadChromium() {
+  try {
+    return (await import('playwright')).chromium;
+  } catch (err) {
+    if (!process.env.PLAYWRIGHT_MODULE) throw err;
+    return (await import(pathToFileURL(resolve(process.env.PLAYWRIGHT_MODULE)).href)).chromium;
+  }
+}
+let chromium;
+try {
+  chromium = await loadChromium();
+} catch {
+  console.error('Playwright is not installed for this project. Install it, or set PLAYWRIGHT_MODULE to its index.mjs path.');
+  process.exit(2);
+}
 
 const types = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
