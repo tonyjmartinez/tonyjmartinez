@@ -11,7 +11,7 @@
 // Exit codes: 0 ok, 1 horizontal overflow, 2 Playwright or dist/ missing.
 import { createServer } from 'node:http';
 import { readFile, stat, mkdir } from 'node:fs/promises';
-import { extname, join, normalize, resolve } from 'node:path';
+import { extname, isAbsolute, join, normalize, relative, resolve } from 'node:path';
 import { existsSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -54,16 +54,22 @@ const types = {
 
 const server = createServer(async (req, res) => {
   try {
-    let p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname));
-    let file = join(root, p);
-    if (!file.startsWith(root)) throw new Error('outside root');
+    const urlPath = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname));
+    let file = join(root, urlPath);
+    const rel = relative(root, file);
+    if (rel.startsWith('..') || isAbsolute(rel)) {
+      res.writeHead(403, { 'content-type': 'text/plain' });
+      return res.end('forbidden');
+    }
     if ((await stat(file)).isDirectory()) file = join(file, 'index.html');
     const body = await readFile(file);
     res.writeHead(200, { 'content-type': types[extname(file)] || 'application/octet-stream' });
     res.end(body);
-  } catch {
-    res.writeHead(404, { 'content-type': 'text/plain' });
-    res.end('not found');
+  } catch (err) {
+    const missing = err.code === 'ENOENT' || err.code === 'ENOTDIR';
+    if (!missing) console.error(`visual-check server error for ${req.url}:`, err);
+    res.writeHead(missing ? 404 : 500, { 'content-type': 'text/plain' });
+    res.end(missing ? 'not found' : 'server error');
   }
 });
 await new Promise((ok) => server.listen(0, '127.0.0.1', ok));
