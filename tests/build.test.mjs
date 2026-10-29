@@ -40,3 +40,33 @@ test('no stale .dev domain in built output', () => {
     assert.doesNotMatch(read(f), /tonyjmartinez\.dev/, f);
   }
 });
+
+test('JSON-LD on home page is valid JSON', () => {
+  const m = read('index.html').match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  assert.ok(m, 'JSON-LD block present');
+  assert.equal(JSON.parse(m[1])['@type'], 'Person');
+});
+
+test('in-page #fragment links point at existing ids', () => {
+  for (const f of ['index.html', '404.html']) {
+    const html = read(f);
+    for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) {
+      assert.match(html, new RegExp(`id="${id}"`), `${f}: #${id}`);
+    }
+  }
+});
+
+test('every link has an accessible name', () => {
+  const html = read('index.html');
+  for (const [, attrs, inner] of html.matchAll(/<a\s([^>]*)>([\s\S]*?)<\/a>/g)) {
+    const text = inner.replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<[^>]+>/g, '').trim();
+    assert.ok(text || /aria-label="[^"]+"/.test(attrs), `unnamed link: ${attrs}`);
+  }
+});
+
+test('external target=_blank links use rel noopener', () => {
+  const html = read('index.html');
+  for (const [tag] of html.matchAll(/<a\s[^>]*target="_blank"[^>]*>/g)) {
+    assert.match(tag, /rel="[^"]*noopener/, tag);
+  }
+});
