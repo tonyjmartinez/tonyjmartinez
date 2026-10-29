@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtempSync, writeFileSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 const script = fileURLToPath(new URL('../scripts/visual-check.mjs', import.meta.url));
 const run = (args, env = {}) =>
@@ -22,17 +22,11 @@ async function playwrightAvailable() {
     await import('playwright');
     return true;
   } catch {
-    if (!process.env.PLAYWRIGHT_MODULE) return false;
-    try {
-      await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE).href);
-      return true;
-    } catch {
-      return false;
-    }
+    return false;
   }
 }
 const canBrowse = await playwrightAvailable();
-test('exits 1 when a page overflows horizontally', { skip: !canBrowse && 'Playwright not available; set PLAYWRIGHT_MODULE to run' }, () => {
+test('exits 1 when a page overflows horizontally', { skip: !canBrowse && 'playwright is not installed as a project dependency' }, () => {
   const root = mkdtempSync(join(tmpdir(), 'vc-fixture-'));
   mkdirSync(root, { recursive: true });
   writeFileSync(join(root, 'index.html'), '<!doctype html><title>x</title><div style="width:2000px">wide</div>');

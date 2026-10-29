@@ -4,16 +4,15 @@
 // is needed and nothing is left running afterwards.
 //
 // Usage: node scripts/visual-check.mjs [--widths 375,1280] [--out /tmp/visual]
-// Playwright is imported from the project's dependencies. If that fails, set
-// PLAYWRIGHT_MODULE to an absolute path of the package's index.mjs (opt-in only;
-// nothing is loaded from a default location). The browser executable is taken
-// from CHROMIUM when set, otherwise Playwright's bundled browser is used.
+// Requires the `playwright` package to be installed in the project (it is not a
+// dependency yet; adding it is a package.json change for a maintainer). The browser
+// executable is taken from CHROMIUM when set, otherwise Playwright's bundled browser.
 // Exit codes: 0 ok, 1 horizontal overflow, 2 Playwright or dist/ missing.
 import { createServer } from 'node:http';
 import { readFile, stat, mkdir } from 'node:fs/promises';
 import { extname, isAbsolute, join, normalize, relative, resolve } from 'node:path';
 import { existsSync } from 'node:fs';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
@@ -29,19 +28,11 @@ if (!existsSync(join(root, 'index.html'))) {
   process.exit(2);
 }
 
-async function loadChromium() {
-  try {
-    return (await import('playwright')).chromium;
-  } catch (err) {
-    if (!process.env.PLAYWRIGHT_MODULE) throw err;
-    return (await import(pathToFileURL(resolve(process.env.PLAYWRIGHT_MODULE)).href)).chromium;
-  }
-}
 let chromium;
 try {
-  chromium = await loadChromium();
+  ({ chromium } = await import('playwright'));
 } catch {
-  console.error('Playwright is not installed for this project. Install it, or set PLAYWRIGHT_MODULE to its index.mjs path.');
+  console.error('Playwright is not installed. Add it as a dev dependency (npm i -D playwright) to use this script.');
   process.exit(2);
 }
 
