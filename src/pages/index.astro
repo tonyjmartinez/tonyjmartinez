@@ -7,6 +7,35 @@ const bio =
   'Software engineer with 9 years of experience focused on frontend and accessibility. I enjoy working at the intersection of engineering, product, and design to build engaging, accessible user experiences.';
 
 const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
+
+// Each card links to its playable deployment (workers.dev). Private repositories are never linked.
+const work = [
+  {
+    title: 'Succulents.info',
+    href: 'https://succulents-info.ajosephmartinez.workers.dev/',
+    status: 'Live',
+    summary: 'Plain-language succulent care guides, a plant library, and a symptom-led plant doctor.',
+    tags: ['Astro', 'Static site'],
+    tone: 'tone-bloom',
+  },
+  {
+    title: 'Tone Zone Survivors',
+    href: 'https://tonezone-survivor.ajosephmartinez.workers.dev/',
+    status: 'Playable in browser',
+    summary: 'A browser action game built with plain HTML5 canvas and no build step.',
+    source: 'https://github.com/tonyjmartinez/tonezone-survivor',
+    tags: ['JavaScript', 'HTML5 canvas'],
+    tone: 'tone-mint',
+  },
+  {
+    title: 'Garden Defense',
+    href: 'https://phaser-game.ajosephmartinez.workers.dev/',
+    status: 'In development',
+    summary: 'A browser game in development, built with Phaser.',
+    tags: ['Phaser'],
+    tone: 'tone-sun',
+  },
+];
 ---
 
 <Base title="Tony Martinez · Frontend and accessibility engineer" description={bio}>
@@ -21,10 +50,46 @@ const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
       }
     </ul>
     <div class="btn-row">
-      <Button href="https://github.com/tonyjmartinez" variant="primary" size="lg" iconAfter="arrow">GitHub</Button>
+      <Button href="#work" variant="primary" size="lg" iconAfter="arrow">Selected work</Button>
+      <Button href="https://github.com/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">GitHub</Button>
+      <Button href="https://www.linkedin.com/in/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">LinkedIn</Button>
     </div>
     <PlantArt slot="art" kind="rosette" leaf="#9ccfc4" tip="#ff86ad" />
   </PageHeader>
+
+  <section id="work" class="work" aria-labelledby="work-title">
+    <h2 id="work-title">Selected work</h2>
+    <p class="work-intro">Projects I am building. Each card opens the live version; some also link to source code.</p>
+    <ul class="grid work-grid">
+      {
+        work.map((w) => (
+          <li>
+            <article class={`card work-card ${w.tone}`}>
+              <h3>
+                {w.href ? <a class="card-link" href={w.href}>{w.title}</a> : w.title}
+              </h3>
+              <p class="work-status">{w.status}</p>
+              <p>{w.summary}</p>
+              <ul class="chip-list" aria-label="Built with">
+                {w.tags.map((t) => (
+                  <li>
+                    <Chip>{t}</Chip>
+                  </li>
+                ))}
+              </ul>
+              {
+                w.source && (
+                  <a class="work-source" href={w.source}>
+                    Source code on GitHub
+                  </a>
+                )
+              }
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </Base>
 
 <style>
@@ -47,5 +112,55 @@ const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
 
   .focus {
     margin: var(--space-5) 0 var(--space-6);
+  }
+
+  .work {
+    padding: var(--space-8) 0 var(--space-7);
+  }
+
+  .work h2 {
+    margin-bottom: var(--space-2);
+  }
+
+  .work-intro {
+    margin: 0 0 var(--space-6);
+    max-width: 52ch;
+  }
+
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 100%;
+    padding: var(--space-5);
+    border-top: 0.6rem solid var(--tone);
+  }
+
+  .work-card h3 {
+    margin: 0;
+  }
+
+  .work-card p {
+    margin: 0;
+  }
+
+  .work-status {
+    font-size: var(--step--1);
+    font-weight: 700;
+  }
+
+  .work-card .chip-list {
+    margin-top: auto;
+  }
+
+  /* Sits above the stretched card link so it is independently clickable. */
+  .work-source {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+    font-weight: 700;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
   }
 </style>

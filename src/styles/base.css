@@ -227,3 +227,31 @@ hr {
 .stack > * + * {
   margin-top: 1rem;
 }
+
+/* Print: plain ink on white, no chrome, show link targets. */
+@media print {
+  :root {
+    --paper: #fff;
+    --surface: #fff;
+    --text: #000;
+    --text-muted: #000;
+    --shadow: transparent;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .skip-link,
+  .theme-toggle,
+  .site-footer button {
+    display: none !important;
+  }
+  .hero {
+    min-height: 0 !important;
+  }
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}
