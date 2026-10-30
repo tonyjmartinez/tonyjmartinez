@@ -4,6 +4,10 @@ Stack: Astro 7 static site ("Rosette" succulents design system), deployed as a C
 Single page: `src/pages/index.astro`; layout `src/layouts/Base.astro`; tokens in `src/styles/tokens.css`.
 Goal of the routine: improve capabilities, polish and professionalism WITHOUT adding much content. Verify with `npm run build` (and `npm run check`) before committing. Don't open PRs unless asked; push to the designated branch.
 
+## Visual check
+`npm run build` then `CHROMIUM=<browser-path> node scripts/visual-check.mjs --widths 375,1280 --out /tmp/visual-check`.
+It serves `dist/` in-process, screenshots each width, and exits 1 on horizontal overflow. Requires `playwright` as a project dependency (not yet added; see the needs-decision friction issue). Exit codes: 0 ok, 1 overflow, 2 setup missing. Open the PNGs to check layout; the script does not judge aesthetics.
+
 ## Log (newest first)
 - 2026-10-23 (hourly run): axe-core pass via Playwright on built site, light + dark: 0 violations. Build + check clean. (To rerun: `npm ci`, `npm run build`, `astro preview`, inject axe-core.) Nothing else changed; remaining backlog needs owner input.
 - 2026-10-23 (hourly run): Added Cross-Origin-Resource-Policy: same-origin header. Reduced-motion + forced-colors already handled in base.css. Site is at diminishing returns; remaining backlog needs owner input or a real PNG.
