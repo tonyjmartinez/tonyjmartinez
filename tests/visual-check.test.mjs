@@ -19,14 +19,16 @@ test('exits 2 with a clear message when dist/ has no index.html', () => {
 // Overflow detection needs a real browser. Run only when Playwright and a browser are configured.
 async function playwrightAvailable() {
   try {
-    await import('playwright');
+    const { chromium } = await import('playwright');
+    const browser = await chromium.launch();
+    await browser.close();
     return true;
   } catch {
     return false;
   }
 }
 const canBrowse = await playwrightAvailable();
-test('exits 1 when a page overflows horizontally', { skip: !canBrowse && 'playwright is not installed as a project dependency' }, () => {
+test('exits 1 when a page overflows horizontally', { skip: !canBrowse && 'no launchable Playwright browser (run npx playwright install chromium)' }, () => {
   const root = mkdtempSync(join(tmpdir(), 'vc-fixture-'));
   mkdirSync(root, { recursive: true });
   writeFileSync(join(root, 'index.html'), '<!doctype html><title>x</title><div style="width:2000px">wide</div>');
