@@ -97,6 +97,16 @@
   }
 }
 
+/* More-contrast preference: muted text becomes full-strength text and
+   outlines get thicker. Placed after the dark rules so it wins in both themes. */
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: var(--text);
+    --border: 4px;
+    --border-thin: 3px;
+  }
+}
+
 /* Reader-controlled text size (set from the Display panel). */
 :root[data-text='large'] {
   font-size: 112.5%;
