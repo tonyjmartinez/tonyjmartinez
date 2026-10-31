@@ -29,12 +29,12 @@
 }
 
 .btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--shadow);
+  transform: translate(calc(-1 * var(--nudge)), calc(-1 * var(--nudge)));
+  box-shadow: var(--lift) var(--lift) 0 var(--shadow);
 }
 
 .btn:active {
-  transform: translate(3px, 3px);
+  transform: translate(var(--press), var(--press));
   box-shadow: 1px 1px 0 var(--shadow);
 }
 
@@ -133,8 +133,13 @@
 }
 
 .card:has(.card-link:hover) {
-  transform: translate(-3px, -3px);
-  box-shadow: calc(var(--lift) + 3px) calc(var(--lift) + 3px) 0 var(--shadow);
+  transform: translate(calc(-1 * var(--nudge)), calc(-1 * var(--nudge)));
+  box-shadow: calc(var(--lift) + var(--nudge)) calc(var(--lift) + var(--nudge)) 0 var(--shadow);
+}
+
+.card:has(.card-link:active) {
+  transform: translate(var(--press), var(--press));
+  box-shadow: 1px 1px 0 var(--shadow);
 }
 
 .card:has(.card-link:focus-visible) {
