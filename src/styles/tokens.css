@@ -12,6 +12,8 @@
   --ink: #0e2318; /* deep agave green — text on every accent */
   --paper: #fff7e8; /* warm sand */
   --surface: #ffffff;
+  --paper-light: #fff7e8; /* theme-independent sand, for light islands */
+  --surface-light: #ffffff;
   --text: var(--ink);
   --text-muted: #3d5246; /* 7.9:1 on paper */
   --line: var(--ink);

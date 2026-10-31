@@ -215,8 +215,8 @@
   color: var(--on-accent);
   --text: var(--ink);
   --text-muted: var(--ink);
-  --paper: #fff7e8;
-  --surface: #ffffff;
+  --paper: var(--paper-light);
+  --surface: var(--surface-light);
   --line: var(--ink);
   --shadow: var(--ink);
   --focus-ring: var(--ink);
@@ -265,7 +265,7 @@
 .page-head-art.art-badge {
   max-width: 22rem;
   padding: var(--space-5) var(--space-6);
-  background: #fff7e8;
+  background: var(--paper-light);
   border: var(--border) solid var(--ink);
   border-radius: 50%;
   box-shadow: var(--lift-lg) var(--lift-lg) 0 var(--ink);
