@@ -63,6 +63,8 @@
   --lift-md: 4px;
   --lift: 6px;
   --lift-lg: 8px;
+  --nudge: 2px; /* hover shift, shared by .btn and cards */
+  --press: 3px; /* active shift */
 
   /* Motion (disabled by the reader's reduced-motion setting) */
   --dur-fast: 120ms;
