@@ -24,6 +24,8 @@ const work = [
     status: 'Playable in browser',
     summary: 'A browser action game built with plain HTML5 canvas and no build step.',
     source: 'https://github.com/tonyjmartinez/tonezone-survivor',
+    built:
+      'A Vampire Survivors-like in plain HTML5 canvas with no build step. Weapons fire automatically; you pick upgrades on level-up. Deployed to Cloudflare on every push to main.',
     tags: ['JavaScript', 'HTML5 canvas'],
     tone: 'tone-mint',
   },
@@ -70,6 +72,13 @@ const work = [
               </h3>
               <p class="work-status">{w.status}</p>
               <p>{w.summary}</p>
+              {
+                w.built && (
+                  <p class="work-built">
+                    <strong>How it’s built:</strong> {w.built}
+                  </p>
+                )
+              }
               <ul class="chip-list" aria-label="Built with">
                 {w.tags.map((t) => (
                   <li>
@@ -144,6 +153,9 @@ const work = [
     margin: 0;
   }
 
+  .work-built strong {
+    font-weight: 700;
+  }
   .work-status {
     font-size: var(--step--1);
     font-weight: 700;

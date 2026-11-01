@@ -96,3 +96,9 @@ test('_headers CSP is self-only (no external origins)', () => {
   assert.match(m[1], /default-src 'self'/);
   assert.match(m[1], /frame-ancestors 'none'/);
 });
+
+test('every "How it’s built" card has a source link', () => {
+  const html = read('index.html');
+  assert.equal((html.match(/How it’s built:/g) ?? []).length, 1);
+  assert.match(html, /github\.com\/tonyjmartinez\/tonezone-survivor/);
+});
