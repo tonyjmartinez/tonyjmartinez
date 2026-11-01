@@ -88,3 +88,11 @@ test('home page has LinkedIn link and a back-to-top anchor to an existing id', (
   assert.match(html, /<a[^>]*href="#main"[^>]*>Back to top<\/a>/);
   assert.match(html, /id="main"/);
 });
+
+test('_headers CSP is self-only (no external origins)', () => {
+  const m = read('_headers').match(/Content-Security-Policy:\s*(.+)/);
+  assert.ok(m, 'CSP header present');
+  assert.doesNotMatch(m[1], /https?:|\/\/|\*/, 'CSP must not list external origins or wildcards');
+  assert.match(m[1], /default-src 'self'/);
+  assert.match(m[1], /frame-ancestors 'none'/);
+});
