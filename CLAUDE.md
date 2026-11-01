@@ -1,6 +1,6 @@
 # Living memory for the hourly portfolio-iteration routine
 
-Stack: Astro 7 static site ("Rosette" succulents design system), deployed as a Cloudflare Worker (`wrangler.toml`, serves `dist/`).
+Stack: Astro 7 static site (direction v2: dark-first editorial redesign, one teal accent; see ROADMAP.md; tokens + AA contrast test in tests/contrast.test.mjs), deployed as a Cloudflare Worker (`wrangler.toml`, serves `dist/`).
 Single page: `src/pages/index.astro`; layout `src/layouts/Base.astro`; tokens in `src/styles/tokens.css`.
 Goal of the routine: improve capabilities, polish and professionalism WITHOUT adding much content. Verify with `npm run build` (and `npm run check`) before committing. Don't open PRs unless asked; push to the designated branch.
 

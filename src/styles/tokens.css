@@ -1,47 +1,59 @@
 /* ==========================================================================
-   Rosette design tokens — succulents.info
-   The single source of truth for colour, type, space and shape.
-   Every text/background pairing meets WCAG AAA (7:1); this is checked by
-   `npm test` (tests/contrast.test.ts) and shown on /design-system/.
+   Portfolio design tokens: dark-first, editorial, one accent colour.
+   The single source of truth for colour, type, space, shape and motion.
+   Every text/background pairing meets WCAG AA; `npm test`
+   (tests/contrast.test.mjs) computes the ratios from this file.
+   Dark is the default; light follows prefers-color-scheme: light, and an
+   explicit data-theme (set by the footer toggle) always wins.
    ========================================================================== */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  /* Core */
-  --ink: #0e2318; /* deep agave green — text on every accent */
-  --paper: #fff7e8; /* warm sand */
-  --surface: #ffffff;
-  --paper-light: #fff7e8; /* theme-independent sand, for light islands */
+  /* Core (dark) */
+  --paper: #0b0d12;
+  --surface: #131720;
+  --surface-2: #1b202b;
+  --text: #f2f4f8;
+  --text-muted: #aab3c5; /* 8.6:1 on paper */
+  --line: #2c3342;
+  --ink: var(--line);
+  --shadow: transparent;
+
+  /* The one accent. --on-accent is the text colour that sits on it. */
+  --accent: #5eead4;
+  --on-accent: #04110e;
+  --accent-soft: #123a35; /* quiet accent tint for chips and highlights */
+
+  /* Legacy tone tokens (old components still read these): all map to the accent. */
+  --bloom: var(--accent);
+  --sun: var(--accent);
+  --mint: var(--accent);
+  --lilac: var(--accent);
+  --coral: var(--accent);
+
+  --focus: var(--accent);
+  --focus-ring: #ffffff;
+  --paper-light: #f7f7f4;
   --surface-light: #ffffff;
-  --text: var(--ink);
-  --text-muted: #3d5246; /* 7.9:1 on paper */
-  --line: var(--ink);
-  --shadow: var(--ink);
 
-  /* Accents — always paired with --on-accent text */
-  --bloom: #ff86ad; /* echeveria tip pink */
-  --sun: #ffd23f;
-  --mint: #9be8b4;
-  --lilac: #c8b5ff;
-  --coral: #ff8a5b;
-  --on-accent: #0e2318;
-
-  --focus: #ffd23f;
-  --focus-ring: #0e2318;
-
-  /* Type */
-  --font-display: 'Bricolage Grotesque Variable', 'Arial Black', system-ui, sans-serif;
+  /* Type: Bricolage Grotesque for display, Atkinson Hyperlegible Next for body */
+  --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
   --font-body: 'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible', system-ui, -apple-system,
     'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --step--1: clamp(0.95rem, 0.92rem + 0.15vw, 1.02rem);
   --step-0: clamp(1.125rem, 1.08rem + 0.2vw, 1.25rem);
-  --step-1: clamp(1.35rem, 1.24rem + 0.5vw, 1.6rem);
+  --step-1: clamp(1.3rem, 1.2rem + 0.5vw, 1.55rem);
   --step-2: clamp(1.6rem, 1.4rem + 1vw, 2.1rem);
   --step-3: clamp(2rem, 1.6rem + 2vw, 3rem);
-  --step-4: clamp(2.1rem, 1.5rem + 3.6vw, 4.6rem);
-  --step-5: clamp(2.4rem, 1.3rem + 5.6vw, 6.4rem);
+  --step-4: clamp(2.4rem, 1.6rem + 3.6vw, 4.5rem);
+  --step-5: clamp(2.8rem, 1.4rem + 6vw, 6.5rem);
+  --step-6: clamp(3.2rem, 1.2rem + 9vw, 9rem);
+  --leading-tight: 1.02;
+  --leading-body: 1.6;
+  --tracking-display: -0.035em;
 
   /* Space */
   --space-1: 0.25rem;
@@ -52,60 +64,72 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 9rem;
 
-  /* Shape: thick outlines and hard, offset "sticker" shadows */
-  --border: 3px;
-  --border-thin: 2px;
-  --radius: 1.25rem;
-  --radius-sm: 0.75rem;
+  /* Shape: hairlines and soft corners, no offset shadows */
+  --border: 1px;
+  --border-thin: 1px;
+  --radius: 1rem;
+  --radius-sm: 0.625rem;
   --radius-pill: 999px;
-  --lift-sm: 3px;
-  --lift-md: 4px;
-  --lift: 6px;
-  --lift-lg: 8px;
+  --lift-sm: 0;
+  --lift-md: 0;
+  --lift: 0;
+  --lift-lg: 0;
   --nudge: 2px; /* hover shift, shared by .btn and cards */
-  --press: 3px; /* active shift */
+  --press: 1px; /* active shift */
 
-  /* Motion (disabled by the reader's reduced-motion setting) */
+  /* Motion (all of it is switched off by prefers-reduced-motion) */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 120ms;
-  --dur: 180ms;
+  --dur: 200ms;
+  --dur-slow: 600ms;
+
   --gutter: clamp(1rem, 4vw, 2.5rem);
   --max: 75rem;
   --measure: 66ch;
 }
 
-/* Dark theme: deep night-garden green. Accent blocks keep dark ink text. */
-:root[data-theme='dark'] {
-  color-scheme: dark;
-  --paper: #0d1912;
-  --surface: #16261d;
-  --text: #f4efe2;
-  --text-muted: #c0d0c5;
-  --line: #f4efe2;
-  --shadow: #9be8b4;
-  --focus-ring: #f4efe2;
+/* Light theme: warm off-white paper, deep teal accent (white text on it). */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --paper: #f7f7f4;
+  --surface: #ffffff;
+  --surface-2: #ecece6;
+  --text: #0b0d12;
+  --text-muted: #474f60; /* 7.6:1 on paper */
+  --line: #cfd2d9;
+  --accent: #0b6b61;
+  --on-accent: #ffffff;
+  --accent-soft: #d6efe9;
+  --focus-ring: #0b0d12;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    color-scheme: dark;
-    --paper: #0d1912;
-    --surface: #16261d;
-    --text: #f4efe2;
-    --text-muted: #c0d0c5;
-    --line: #f4efe2;
-    --shadow: #9be8b4;
-    --focus-ring: #f4efe2;
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --paper: #f7f7f4;
+    --surface: #ffffff;
+    --surface-2: #ecece6;
+    --text: #0b0d12;
+    --text-muted: #474f60;
+    --line: #cfd2d9;
+    --accent: #0b6b61;
+    --on-accent: #ffffff;
+    --accent-soft: #d6efe9;
+    --focus-ring: #0b0d12;
   }
 }
 
 /* More-contrast preference: muted text becomes full-strength text and
-   outlines get thicker. Placed after the dark rules so it wins in both themes. */
+   outlines get thicker. Placed after the theme rules so it wins in both. */
 @media (prefers-contrast: more) {
   :root {
     --text-muted: var(--text);
-    --border: 4px;
-    --border-thin: 3px;
+    --line: var(--text);
+    --border: 2px;
+    --border-thin: 2px;
   }
 }
 

@@ -1,4 +1,4 @@
-/* Rosette component classes, trimmed to the components this site uses. */
+/* portfolio component classes, trimmed to the components this site uses. */
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -214,17 +214,12 @@
   --tone: var(--coral);
 }
 
-/* A colour block is a light-theme island in both themes: every token inside resolves to dark ink on light. */
+/* Colour blocks are quiet now: they sit on the page paper and the tone is only
+   a hairline accent, so every token keeps its theme value (and its contrast). */
 .on-tone {
-  background: var(--tone);
-  color: var(--on-accent);
-  --text: var(--ink);
-  --text-muted: var(--ink);
-  --paper: var(--paper-light);
-  --surface: var(--surface-light);
-  --line: var(--ink);
-  --shadow: var(--ink);
-  --focus-ring: var(--ink);
+  background: var(--paper);
+  color: var(--text);
+  border-top: 3px solid var(--tone);
 }
 
 .on-tone a:not(.btn) {

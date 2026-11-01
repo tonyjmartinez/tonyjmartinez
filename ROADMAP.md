@@ -1,5 +1,20 @@
 # Roadmap: next milestone
 
+## Direction v2 (supersedes the "no new fonts/images/deps" rule below)
+
+Significant redesign: dark-first, editorial, one accent colour (teal), Bricolage Grotesque + Atkinson, zero third-party requests, CSP self-only, all motion off under `prefers-reduced-motion`. Story: frontend + accessibility engineer who runs a fleet of AI agents (pi-durable-local) that build and ship his projects. Ordered PRs:
+
+1. [x] Design foundation: tokens (`src/styles/tokens.css`), base styles, AA contrast test (`tests/contrast.test.mjs`).
+2. New hero with the animated agent-pipeline element and CTAs (Selected work, GitHub, LinkedIn, Email).
+3. Real project screenshots via a committed playwright script, `astro:assets` Image.
+4. Featured work grid as rich cards (pi-durable-local, Tone Zone, Agent vs Agent, Succulents.info, Garden Defense).
+5. Case-study pages at `/work/<slug>` (content collection; claims sourced from repo READMEs).
+6. "How I build" factory diagram.
+7. Skills/approach and contact sections.
+8. OG image, view transitions, 404 restyle, axe + visual-check pass.
+
+Legacy items below predate v2; items 1-2 of Design are superseded by the new tokens.
+
 Single-page Astro site (`src/pages/index.astro`, tokens in `src/styles/tokens.css`). Items are ordered by user value, each sized for one loop iteration. Every item must be verifiable from code (`npm run build`, `npm run check`, `npm test`). No new fonts, images or dependencies, and no copy that states facts not already in the repo.
 
 ## Design (design-polish loop)

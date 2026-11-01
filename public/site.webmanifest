@@ -4,7 +4,7 @@
   "description": "Portfolio of Tony Martinez, a frontend and accessibility engineer.",
   "start_url": "/",
   "display": "browser",
-  "background_color": "#fff7e8",
-  "theme_color": "#fff7e8",
+  "background_color": "#0b0d12",
+  "theme_color": "#0b0d12",
   "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }

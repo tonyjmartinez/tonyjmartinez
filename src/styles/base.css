@@ -1,4 +1,4 @@
-/* Rosette base: reset, typography, focus, motion, layout utilities. */
+/* Base: reset, typography, focus, motion, layout utilities. */
 
 /* ---------- Reset-ish ---------- */
 *,
@@ -28,7 +28,8 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   font-size: var(--step-0);
-  line-height: 1.6;
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
   overflow-wrap: break-word;
 }
 
@@ -47,9 +48,9 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
   margin: 0 0 0.5em;
   text-wrap: balance;
   overflow-wrap: break-word;
@@ -85,7 +86,7 @@ a {
   color: inherit;
   text-decoration-line: underline;
   text-decoration-thickness: 0.14em;
-  text-decoration-color: var(--bloom);
+  text-decoration-color: var(--accent);
   text-underline-offset: 0.2em;
 }
 
@@ -99,20 +100,20 @@ strong {
 
 hr {
   border: 0;
-  border-top: var(--border) dashed var(--line);
+  border-top: var(--border) solid var(--line);
   margin: 3rem 0;
 }
 
-/* Big, unmistakable focus indicator: yellow halo + ink ring. */
+/* Unmistakable focus indicator: high-contrast ring plus an accent halo. */
 :focus-visible {
-  outline: 4px solid var(--focus-ring);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 3px;
-  box-shadow: 0 0 0 9px var(--focus);
+  box-shadow: 0 0 0 7px var(--focus);
   border-radius: 6px;
 }
 
 ::selection {
-  background: var(--sun);
+  background: var(--accent);
   color: var(--on-accent);
 }
 
@@ -191,7 +192,7 @@ hr {
   padding: 1rem 1.25rem;
   border: var(--border) solid var(--line);
   border-radius: var(--radius-sm);
-  background: var(--sun);
+  background: var(--accent);
   color: var(--on-accent);
   box-shadow: 4px 4px 0 var(--shadow);
 }
