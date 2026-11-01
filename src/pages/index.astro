@@ -20,6 +20,7 @@ const work = [
     status: 'Public repo · in daily use',
     summary: 'A small software factory: durable agent sessions take work from idea to merged PR in a sandbox, under budgets and merge gates.',
     source: 'https://github.com/tonyjmartinez/pi-durable-local',
+    study: '/work/pi-durable-local/',
     tags: ['Node', 'SQLite', 'Agents'],
     tile: true,
   },
@@ -31,6 +32,7 @@ const work = [
     status: 'Playable in browser',
     summary: 'A Vampire Survivors-like in plain HTML5 canvas with no build step; weapons fire automatically and you pick upgrades on level-up.',
     source: 'https://github.com/tonyjmartinez/tonezone-survivor',
+    study: '/work/tonezone-survivor/',
     tags: ['JavaScript', 'HTML5 canvas'],
   },
   {
@@ -41,6 +43,7 @@ const work = [
     status: 'Playable in browser',
     summary: 'A bump-and-run spy board game for phone and desktop on a 6×6 board, with 21 missions each proven solvable by tests.',
     source: 'https://github.com/tonyjmartinez/agent-vs-agent',
+    study: '/work/agent-vs-agent/',
     tags: ['TypeScript', 'Playwright'],
   },
   {
@@ -114,6 +117,13 @@ const work = [
                   </li>
                 ))}
               </ul>
+              {
+                w.study && (
+                  <a class="work-source" href={w.study}>
+                    Read the case study<span class="visually-hidden"> for {w.title}</span>
+                  </a>
+                )
+              }
               {
                 w.source && (
                   <a class="work-source" href={w.source}>
