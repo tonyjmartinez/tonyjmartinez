@@ -81,3 +81,10 @@ test('Selected work section links to public workers.dev deployments only', () =>
   assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/tonezone-survivor"[^>]*>Source code on GitHub/);
   assert.doesNotMatch(html, /agent-vs-agent/);
 });
+
+test('home page has LinkedIn link and a back-to-top anchor to an existing id', () => {
+  const html = read('index.html');
+  assert.match(html, /href="https:\/\/www\.linkedin\.com\/in\/tonyjmartinez"/);
+  assert.match(html, /<a[^>]*href="#main"[^>]*>Back to top<\/a>/);
+  assert.match(html, /id="main"/);
+});
