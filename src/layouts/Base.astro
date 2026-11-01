@@ -18,6 +18,7 @@ const jsonLd = {
   url: Astro.site?.href,
   jobTitle: 'Software engineer',
   description,
+  email: 'mailto:ajosephmartinez@gmail.com',
   sameAs: ['https://github.com/tonyjmartinez', 'https://www.linkedin.com/in/tonyjmartinez'],
 };
 ---
@@ -63,6 +64,7 @@ const jsonLd = {
     <footer class="site-footer">
       <div class="wrap">
         <p>© {new Date().getFullYear()} Tony Martinez</p>
+        <a class="back-to-top" href="#main">Back to top</a>
         <button type="button" class="theme-toggle" aria-pressed="false" hidden>
           <span class="theme-label">Dark theme</span>
         </button>
@@ -133,6 +135,10 @@ const jsonLd = {
 
   .site-footer p {
     margin: 0;
+  }
+
+  .back-to-top {
+    color: var(--text);
   }
 
   .theme-toggle[hidden] {
