@@ -109,3 +109,16 @@ test('hero has email, pipeline and no plant art', () => {
   assert.match(html, /class="[^"]*pipeline/);
   assert.doesNotMatch(html, /Hey, I/);
 });
+
+test('work cards render optimised screenshots with alt text and dimensions', () => {
+  const html = read('index.html');
+  const imgs = [...html.matchAll(/<img[^>]*class="[^"]*work-shot[^"]*"[^>]*>/g)].map((m) => m[0]);
+  assert.ok(imgs.length >= 3);
+  for (const i of imgs) {
+    assert.match(i, /alt="[^"]{10,}"/);
+    assert.match(i, /width="\d+"/);
+    assert.match(i, /height="\d+"/);
+    assert.match(i, /loading="lazy"/);
+    assert.match(i, /\.webp/);
+  }
+});

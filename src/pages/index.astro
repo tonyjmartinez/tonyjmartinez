@@ -1,7 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import Pipeline from '../components/Pipeline.astro';
 import { Button, Chip } from '@/components/ui';
+import succulents from '../assets/work/succulents-info.webp';
+import tonezone from '../assets/work/tonezone-survivor.webp';
+import garden from '../assets/work/phaser-game.webp';
 
 const bio =
   'Software engineer with 9 years of experience focused on frontend and accessibility. I enjoy working at the intersection of engineering, product, and design to build engaging, accessible user experiences.';
@@ -12,6 +16,8 @@ const work = [
   {
     title: 'Succulents.info',
     href: 'https://succulents-info.ajosephmartinez.workers.dev/',
+    shot: succulents,
+    alt: 'Succulents.info home page: plain-language succulent care with a close photo of rosette succulents.',
     status: 'Live',
     summary: 'Plain-language succulent care guides, a plant library, and a symptom-led plant doctor.',
     tags: ['Astro', 'Static site'],
@@ -20,6 +26,8 @@ const work = [
   {
     title: 'Tone Zone Survivors',
     href: 'https://tonezone-survivor.ajosephmartinez.workers.dev/',
+    shot: tonezone,
+    alt: 'Tone Zone Survivors title screen with controls and upgrade shop in pixel text on a dark background.',
     status: 'Playable in browser',
     summary: 'A browser action game built with plain HTML5 canvas and no build step.',
     source: 'https://github.com/tonyjmartinez/tonezone-survivor',
@@ -31,6 +39,8 @@ const work = [
   {
     title: 'Garden Defense',
     href: 'https://phaser-game.ajosephmartinez.workers.dev/',
+    shot: garden,
+    alt: 'Garden Defense title screen: pixel title over a green garden with trees and a gardener.',
     status: 'In development',
     summary: 'A browser game in development, built with Phaser.',
     tags: ['Phaser'],
@@ -70,6 +80,7 @@ const work = [
         work.map((w) => (
           <li>
             <article class={`card work-card ${w.tone}`}>
+              <Image class="work-shot" src={w.shot} alt={w.alt} width={640} height={400} widths={[480, 640]} sizes="(min-width: 52rem) 30vw, 90vw" loading="lazy" format="webp" />
               <h3>
                 {w.href ? <a class="card-link" href={w.href}>{w.title}</a> : w.title}
               </h3>
@@ -139,6 +150,17 @@ const work = [
     max-width: 52ch;
     margin-bottom: var(--space-6);
   }
+  .work :global(.work-shot) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+    border: var(--border) solid var(--line);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-4);
+  }
+
   .work {
     padding: var(--space-8) 0 var(--space-7);
   }
