@@ -3,7 +3,7 @@
 // horizontal overflow. Serves dist/ in-process, so no background preview server
 // is needed and nothing is left running afterwards.
 //
-// Usage: node scripts/visual-check.mjs [--widths 375,1280] [--out /tmp/visual]
+// Usage: node scripts/visual-check.mjs [--widths 320,360,375,1280] [--out /tmp/visual]
 // Requires the `playwright` package to be installed in the project (it is not a
 // dependency yet; adding it is a package.json change for a maintainer). The browser
 // executable is taken from CHROMIUM when set, otherwise Playwright's bundled browser.
@@ -20,7 +20,7 @@ const opt = (name, fallback) => {
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
 const root = resolve(opt('--root', fileURLToPath(new URL('../dist/', import.meta.url))));
-const widths = opt('--widths', '375,1280').split(',').map(Number).filter(Boolean);
+const widths = opt('--widths', '320,360,375,1280').split(',').map(Number).filter(Boolean);
 const outDir = resolve(opt('--out', '/tmp/visual-check'));
 
 if (!existsSync(join(root, 'index.html'))) {

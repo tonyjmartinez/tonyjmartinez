@@ -5,7 +5,7 @@ Single page: `src/pages/index.astro`; layout `src/layouts/Base.astro`; tokens in
 Goal of the routine: improve capabilities, polish and professionalism WITHOUT adding much content. Verify with `npm run build` (and `npm run check`) before committing. Don't open PRs unless asked; push to the designated branch.
 
 ## Visual check
-`npm run build` then `CHROMIUM=<browser-path> node scripts/visual-check.mjs --widths 375,1280 --out /tmp/visual-check`.
+`npm run build` then `CHROMIUM=<browser-path> node scripts/visual-check.mjs --widths 320,360,375,1280 --out /tmp/visual-check`.
 It serves `dist/` in-process, screenshots each width, and exits 1 on horizontal overflow. Requires `playwright` as a project dependency (not yet added; see the needs-decision friction issue). Exit codes: 0 ok, 1 overflow, 2 setup missing. Open the PNGs to check layout; the script does not judge aesthetics.
 
 ## Log (newest first)
