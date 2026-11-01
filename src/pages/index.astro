@@ -5,6 +5,7 @@ import Pipeline from '../components/Pipeline.astro';
 import { Button, Chip } from '@/components/ui';
 import succulents from '../assets/work/succulents-info.webp';
 import tonezone from '../assets/work/tonezone-survivor.webp';
+import avsa from '../assets/work/agent-vs-agent.webp';
 import garden from '../assets/work/phaser-game.webp';
 
 const bio =
@@ -12,7 +13,36 @@ const bio =
 
 
 // Each card links to its playable deployment (workers.dev). Private repositories are never linked.
+// Sources: pi-durable-local README, agent-vs-agent README, existing copy for the rest.
 const work = [
+  {
+    title: 'pi-durable-local',
+    status: 'Public repo · in daily use',
+    summary: 'A small software factory: durable agent sessions take work from idea to merged PR in a sandbox, under budgets and merge gates.',
+    source: 'https://github.com/tonyjmartinez/pi-durable-local',
+    tags: ['Node', 'SQLite', 'Agents'],
+    tile: true,
+  },
+  {
+    title: 'Tone Zone Survivors',
+    href: 'https://tonezone-survivor.ajosephmartinez.workers.dev/',
+    shot: tonezone,
+    alt: 'Tone Zone Survivors title screen with controls and upgrade shop in pixel text on a dark background.',
+    status: 'Playable in browser',
+    summary: 'A Vampire Survivors-like in plain HTML5 canvas with no build step; weapons fire automatically and you pick upgrades on level-up.',
+    source: 'https://github.com/tonyjmartinez/tonezone-survivor',
+    tags: ['JavaScript', 'HTML5 canvas'],
+  },
+  {
+    title: 'Agent vs Agent',
+    href: 'https://agent-vs-agent.ajosephmartinez.workers.dev/',
+    shot: avsa,
+    alt: 'Agent vs Agent start screen for a bump-and-run spy board game.',
+    status: 'Playable in browser',
+    summary: 'A bump-and-run spy board game for phone and desktop on a 6×6 board, with 21 missions each proven solvable by tests.',
+    source: 'https://github.com/tonyjmartinez/agent-vs-agent',
+    tags: ['TypeScript', 'Playwright'],
+  },
   {
     title: 'Succulents.info',
     href: 'https://succulents-info.ajosephmartinez.workers.dev/',
@@ -21,20 +51,6 @@ const work = [
     status: 'Live',
     summary: 'Plain-language succulent care guides, a plant library, and a symptom-led plant doctor.',
     tags: ['Astro', 'Static site'],
-    tone: 'tone-bloom',
-  },
-  {
-    title: 'Tone Zone Survivors',
-    href: 'https://tonezone-survivor.ajosephmartinez.workers.dev/',
-    shot: tonezone,
-    alt: 'Tone Zone Survivors title screen with controls and upgrade shop in pixel text on a dark background.',
-    status: 'Playable in browser',
-    summary: 'A browser action game built with plain HTML5 canvas and no build step.',
-    source: 'https://github.com/tonyjmartinez/tonezone-survivor',
-    built:
-      'A Vampire Survivors-like in plain HTML5 canvas with no build step. Weapons fire automatically; you pick upgrades on level-up. Deployed to Cloudflare on every push to main.',
-    tags: ['JavaScript', 'HTML5 canvas'],
-    tone: 'tone-mint',
   },
   {
     title: 'Garden Defense',
@@ -44,7 +60,6 @@ const work = [
     status: 'In development',
     summary: 'A browser game in development, built with Phaser.',
     tags: ['Phaser'],
-    tone: 'tone-sun',
   },
 ];
 ---
@@ -79,20 +94,19 @@ const work = [
       {
         work.map((w) => (
           <li>
-            <article class={`card work-card ${w.tone}`}>
-              <Image class="work-shot" src={w.shot} alt={w.alt} width={640} height={400} widths={[480, 640]} sizes="(min-width: 52rem) 30vw, 90vw" loading="lazy" format="webp" />
+            <article class="card work-card">
+              {w.shot ? (
+                <Image class="work-shot" src={w.shot} alt={w.alt} width={640} height={400} widths={[480, 640]} sizes="(min-width: 64rem) 30vw, (min-width: 40rem) 45vw, 90vw" loading="lazy" format="webp" />
+              ) : (
+                <div class="work-shot work-tile" aria-hidden="true">
+                  <span>goal</span><span>→ PR</span><span>→ review</span><span>→ merge</span>
+                </div>
+              )}
               <h3>
                 {w.href ? <a class="card-link" href={w.href}>{w.title}</a> : w.title}
               </h3>
               <p class="work-status">{w.status}</p>
               <p>{w.summary}</p>
-              {
-                w.built && (
-                  <p class="work-built">
-                    <strong>How it’s built:</strong> {w.built}
-                  </p>
-                )
-              }
               <ul class="chip-list" aria-label="Built with">
                 {w.tags.map((t) => (
                   <li>
@@ -103,7 +117,7 @@ const work = [
               {
                 w.source && (
                   <a class="work-source" href={w.source}>
-                    Source code on GitHub
+                    Source code on GitHub<span class="visually-hidden"> for {w.title}</span>
                   </a>
                 )
               }
@@ -180,7 +194,6 @@ const work = [
     gap: var(--space-3);
     height: 100%;
     padding: var(--space-5);
-    border-top: 0.6rem solid var(--tone);
   }
 
   .work-card h3 {
@@ -191,8 +204,31 @@ const work = [
     margin: 0;
   }
 
-  .work-built strong {
-    font-weight: 700;
+  .work :global(.work-tile) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--surface-2);
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--accent);
+  }
+  .work-card {
+    transition: transform var(--dur, 200ms) var(--ease, ease), border-color var(--dur, 200ms) var(--ease, ease);
+  }
+  .work-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .work-card {
+      transition: none;
+    }
+    .work-card:hover {
+      transform: none;
+    }
   }
   .work-status {
     font-size: var(--step--1);

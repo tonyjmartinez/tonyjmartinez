@@ -74,12 +74,15 @@ test('external target=_blank links use rel noopener', () => {
 test('Selected work section links to public workers.dev deployments only', () => {
   const html = read('index.html');
   assert.match(html, /<section id="work"[^>]*aria-labelledby="work-title"/);
-  for (const u of ['succulents-info', 'tonezone-survivor', 'phaser-game']) {
+  for (const u of ['succulents-info', 'tonezone-survivor', 'phaser-game', 'agent-vs-agent']) {
     assert.match(html, new RegExp(`href="https://${u}\\.ajosephmartinez\\.workers\\.dev/"`));
   }
   assert.doesNotMatch(html, /github\.com\/tonyjmartinez\/phaser-game/);
   assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/tonezone-survivor"[^>]*>Source code on GitHub/);
-  assert.doesNotMatch(html, /agent-vs-agent/);
+  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/agent-vs-agent"/);
+  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/pi-durable-local"[^>]*>Source code on GitHub/);
+  assert.doesNotMatch(html, /github\.com\/tonyjmartinez\/succulents/);
+  assert.equal((html.match(/class="card work-card/g) || []).length, 5);
 });
 
 test('home page has LinkedIn link and a back-to-top anchor to an existing id', () => {
@@ -95,12 +98,6 @@ test('_headers CSP is self-only (no external origins)', () => {
   assert.doesNotMatch(m[1], /https?:|\/\/|\*/, 'CSP must not list external origins or wildcards');
   assert.match(m[1], /default-src 'self'/);
   assert.match(m[1], /frame-ancestors 'none'/);
-});
-
-test('every "How it’s built" card has a source link', () => {
-  const html = read('index.html');
-  assert.equal((html.match(/How it’s built:/g) ?? []).length, 1);
-  assert.match(html, /github\.com\/tonyjmartinez\/tonezone-survivor/);
 });
 
 test('hero has email, pipeline and no plant art', () => {
