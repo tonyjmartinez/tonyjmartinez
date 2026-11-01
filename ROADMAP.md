@@ -6,7 +6,7 @@ Single-page Astro site (`src/pages/index.astro`, tokens in `src/styles/tokens.cs
 
 1. **Add a `prefers-contrast: more` block.** Why: `base.css` handles `prefers-reduced-motion`, `forced-colors` and print, but `grep prefers-contrast src` finds nothing. Raise muted text, borders and shadows to full ink in `tokens.css`. Test: compute contrast ratios from the token values.
 2. **Make work-card hover and active states consistent with `.btn`.** Why: `.btn` lifts 2px on hover and presses 3px on active (`ui.css` lines 31-38), while cards lift 3px (`ui.css` ~136). Unify the offsets into shared tokens and keep the reduced-motion guard.
-3. **Audit the 360px layout of hero, cards and footer by code.** Why: `scripts/visual-check.mjs` exists but runs only at 375 and 1280. Add 320 and 360 to the documented widths in `CLAUDE.md`, and fix any overflow or tight spacing found, using `--space-*` tokens only.
+3. [x] **Audit the 360px layout of hero, cards and footer by code.** Why: `scripts/visual-check.mjs` exists but runs only at 375 and 1280. Add 320 and 360 to the documented widths in `CLAUDE.md`, and fix any overflow or tight spacing found, using `--space-*` tokens only.
 4. **Print and 404 polish.** Why: print has its own stylesheet (`base.css` ~232) and `404.astro` is the only other page. Check both use tokens and have a clear primary action. Touches `404.astro` and the print block only.
 
 ## Product (product loop)
