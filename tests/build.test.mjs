@@ -102,3 +102,10 @@ test('every "How it’s built" card has a source link', () => {
   assert.equal((html.match(/How it’s built:/g) ?? []).length, 1);
   assert.match(html, /github\.com\/tonyjmartinez\/tonezone-survivor/);
 });
+
+test('hero has email, pipeline and no plant art', () => {
+  const html = read('index.html');
+  assert.match(html, /href="mailto:ajosephmartinez@gmail\.com"/);
+  assert.match(html, /class="[^"]*pipeline/);
+  assert.doesNotMatch(html, /Hey, I/);
+});
