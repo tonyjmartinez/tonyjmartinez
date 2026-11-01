@@ -20,6 +20,6 @@ It serves `dist/` in-process, screenshots each width, and exits 1 on horizontal 
 - 2026-10-22: Added footer light/dark theme toggle (persisted, no-flash inline script), JSON-LD Person data, 404 page, sitemap.xml + robots sitemap link, this file.
 
 ## Ideas backlog
-- Social/OG image (needs a real PNG; summary card is used now)
+- ~~Social/OG image~~ done: scripts/generate-og.mjs -> public/og.png
 - ~~a11y pass with Playwright + axe~~ done (0 violations); Lighthouse optional
 - Add a link to resume/email once the owner supplies them (do not invent)
