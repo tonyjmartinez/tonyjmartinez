@@ -1,7 +1,7 @@
 ---
 /**
  * Pipeline: the hero's signature element. Four stages (goal, PR, review, merge)
- * that light up in turn, with a packet travelling along the rail.
+ * that light up in turn.
  * Pure CSS; the animation is removed under prefers-reduced-motion and the
  * static list reads the same without it.
  */
@@ -26,7 +26,6 @@ const stages = [
       ))
     }
   </ol>
-  <div class="rail" aria-hidden="true"><span class="packet"></span></div>
 </figure>
 
 <style>
@@ -86,9 +85,6 @@ const stages = [
     font-size: var(--step--1);
     color: var(--text-muted);
     font-family: var(--font-body);
-  }
-  .rail {
-    display: none;
   }
 
   @media (min-width: 52rem) {
