@@ -1,0 +1,80 @@
+---
+/**
+ * Approach + Contact. Every claim describes this site itself (see CLAUDE.md,
+ * tests/contrast.test.mjs, public/_headers) or the owner's stated background
+ * (nine years of frontend and accessibility work). No invented metrics.
+ */
+const points = [
+  { title: 'Accessibility first', text: 'Nine years of accessibility work. This site checks AA colour contrast in a test, honours reduced motion and forced colours, and passes an axe-core scan in light and dark.' },
+  { title: 'Performance', text: 'A static Astro site served from Cloudflare, with optimised WebP screenshots, a tiny amount of JavaScript and zero third-party requests under a self-only CSP.' },
+  { title: 'Design engineering', text: 'One accent colour, a token-based type and spacing scale, and components that compose. Design decisions live in code and are covered by tests.' },
+];
+---
+
+<section id="approach" class="approach" aria-labelledby="approach-title">
+  <h2 id="approach-title">Approach</h2>
+  <ul class="approach-list">
+    {
+      points.map((p) => (
+        <li>
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <h2 id="contact-title">Contact</h2>
+  <p class="contact-lead">Want to talk about frontend, accessibility or agent tooling? Email is best.</p>
+  <ul class="contact-links">
+    <li><a href="mailto:ajosephmartinez@gmail.com">ajosephmartinez@gmail.com</a></li>
+    <li><a href="https://www.linkedin.com/in/tonyjmartinez">LinkedIn</a></li>
+    <li><a href="https://github.com/tonyjmartinez">GitHub</a></li>
+  </ul>
+</section>
+
+<style>
+  .approach,
+  .contact {
+    margin-block: var(--space-7, 4rem);
+  }
+  .approach-list {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+  .approach-list li {
+    padding: var(--space-4);
+    background: var(--surface);
+    border: var(--border) solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+  }
+  .approach-list h3 {
+    margin: 0 0 var(--space-2);
+  }
+  .approach-list p {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .contact-lead {
+    color: var(--text-muted);
+    max-width: 52ch;
+  }
+  .contact-links {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-5);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    overflow-wrap: anywhere;
+  }
+</style>
