@@ -1,0 +1,103 @@
+---
+/**
+ * Factory: "How I build". A static diagram of how pi-durable-local moves work
+ * from goal to merge. Every statement is taken from that repo's README.md
+ * (sections: overview, Chain of command, Loops, The ship loop). No motion, no JS.
+ */
+const steps = [
+  { tag: 'Goal', title: 'Generals set it', text: 'Tony and Claude Code sessions set goals and answer escalations. Cheap Sonnet and Haiku sessions are the workforce.' },
+  { tag: 'Session', title: 'Durable sessions', text: 'Long-running agent conversations in a bubblewrap sandbox with no credentials. They survive restarts and resume from the last committed step.' },
+  { tag: 'Loop', title: 'Loops under budget', text: 'A session wakes on an interval within a dollar budget and an iteration cap. A gate decides in code whether a tick is worth running.' },
+  { tag: 'Gates', title: 'PR template and CI', text: 'The daemon opens PRs from a template. A deterministic state machine, pr_tick, picks the one next action.' },
+  { tag: 'Review', title: 'Independent review', text: 'A separate model reads the diff for the exact head commit. Risky or one-way changes park for a human.' },
+  { tag: 'Merge', title: 'Pinned squash merge', text: 'Low and medium risk PRs that pass every gate merge, pinned to the checked commit.' },
+];
+---
+
+<section id="how-i-build" class="factory" aria-labelledby="factory-title">
+  <h2 id="factory-title">How I build</h2>
+  <p class="factory-intro">
+    The projects above come out of <a href="https://github.com/tonyjmartinez/pi-durable-local">pi-durable-local</a>.
+    One daemon owns the state; everything else goes through it. This is the path a change takes.
+  </p>
+  <ol class="factory-steps">
+    {
+      steps.map((s, i) => (
+        <li class="factory-step">
+          <span class="factory-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <p class="factory-tag">{s.tag}</p>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+  <p class="factory-foot">
+    Agents never hold GitHub credentials, and an audit log records every decision.
+    <a href="/work/pi-durable-local/">Read the case study</a>.
+  </p>
+</section>
+
+<style>
+  .factory {
+    margin-block: var(--space-7, 4rem);
+  }
+  .factory-intro {
+    max-width: 62ch;
+    color: var(--text-muted);
+  }
+  .factory-steps {
+    list-style: none;
+    margin: var(--space-5) 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    counter-reset: none;
+  }
+  .factory-step {
+    position: relative;
+    margin: 0;
+    padding: var(--space-4);
+    background: var(--surface);
+    border: var(--border) solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    transition: transform var(--dur, 0.2s) var(--ease, ease), border-color var(--dur, 0.2s) var(--ease, ease);
+  }
+  .factory-step:hover {
+    transform: translateY(-3px);
+  }
+  .factory-n {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+  .factory-tag {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--accent);
+  }
+  .factory-step h3 {
+    margin: var(--space-1) 0 var(--space-2);
+  }
+  .factory-step p:last-child {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  .factory-foot {
+    color: var(--text-muted);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .factory-step {
+      transition: none;
+    }
+    .factory-step:hover {
+      transform: none;
+    }
+  }
+</style>
