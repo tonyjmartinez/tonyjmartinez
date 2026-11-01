@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { Chip } from '@/components/ui';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const sections = [
+  { id: 'does', title: 'What it does', items: d.does },
+  { id: 'built', title: 'How it is built', items: d.built },
+  { id: 'interesting', title: 'What is interesting', items: d.interesting },
+];
+---
+
+<Base title={`${d.title} · Case study · Tony Martinez`} description={d.summary}>
+  <article class="wrap study">
+    <p class="crumb"><a href="/#work">← Selected work</a></p>
+    <h1>{d.title}</h1>
+    <p class="lede">{d.summary}</p>
+    <p class="links">
+      {d.live && <a href={d.live}>Open live site<span class="visually-hidden"> for {d.title}</span></a>}
+      {d.source && <a href={d.source}>Source on GitHub<span class="visually-hidden"> for {d.title}</span></a>}
+    </p>
+
+    <section aria-labelledby="problem">
+      <h2 id="problem">Problem</h2>
+      <p>{d.problem}</p>
+    </section>
+    {
+      sections.map((s) => (
+        <section aria-labelledby={s.id}>
+          <h2 id={s.id}>{s.title}</h2>
+          <ul>{s.items.map((i) => <li>{i}</li>)}</ul>
+        </section>
+      ))
+    }
+    <section aria-labelledby="stack">
+      <h2 id="stack">Stack</h2>
+      <ul class="chip-list" aria-label="Stack">
+        {d.stack.map((t) => <li><Chip>{t}</Chip></li>)}
+      </ul>
+    </section>
+    <p class="src">Sources: {d.sources.join(', ')}{d.source ? ' (from the public repository).' : '.'}</p>
+  </article>
+</Base>
+
+<style>
+  .study { padding-block: var(--space-7); max-width: 46rem; }
+  .crumb { margin: 0 0 var(--space-5); }
+  .lede { font-size: 1.25rem; color: var(--text-muted, inherit); }
+  .links { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+  section { margin-top: var(--space-6); }
+  ul { padding-left: 1.25rem; }
+  li { margin-block: var(--space-2); }
+  .chip-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .src { margin-top: var(--space-7); font-size: 0.875rem; opacity: 0.8; }
+</style>

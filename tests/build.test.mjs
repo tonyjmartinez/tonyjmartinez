@@ -119,3 +119,13 @@ test('work cards render optimised screenshots with alt text and dimensions', () 
     assert.match(i, /\.webp/);
   }
 });
+
+test('case-study pages exist, have one h1, and are in the sitemap', () => {
+  for (const slug of ['pi-durable-local', 'tonezone-survivor', 'agent-vs-agent']) {
+    const html = read(`work/${slug}/index.html`);
+    assert.equal((html.match(/<h1[\s>]/g) ?? []).length, 1, slug);
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://tonyjmartinez\\.com/work/${slug}/`));
+    assert.match(read('sitemap.xml'), new RegExp(`/work/${slug}/`));
+    assert.match(read('index.html'), new RegExp(`href="/work/${slug}/"`));
+  }
+});
