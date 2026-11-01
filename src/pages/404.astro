@@ -4,9 +4,20 @@ import { Button } from '@/components/ui';
 ---
 
 <Base title="Page not found · Tony Martinez" description="That page doesn’t exist." noindex>
-  <div class="wrap section">
+  <div class="wrap section nf">
+    <p class="nf-code" aria-hidden="true">404</p>
     <h1>Page not found</h1>
     <p class="lede">That page doesn’t exist, or it moved.</p>
     <Button href="/" variant="primary" iconAfter="arrow">Back home</Button>
   </div>
 </Base>
+
+<style>
+  .nf-code {
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 18vw, 10rem);
+    line-height: 1;
+    margin: 0 0 var(--space-3, 1rem);
+    color: var(--accent);
+  }
+</style>

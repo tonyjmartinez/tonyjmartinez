@@ -256,3 +256,10 @@ hr {
     word-break: break-all;
   }
 }
+
+/* Cross-document page transitions: no JS, off for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
