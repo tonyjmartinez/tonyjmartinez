@@ -1,12 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import PlantArt from '../components/PlantArt.astro';
-import { Button, Chip, PageHeader } from '@/components/ui';
+import Pipeline from '../components/Pipeline.astro';
+import { Button, Chip } from '@/components/ui';
 
 const bio =
   'Software engineer with 9 years of experience focused on frontend and accessibility. I enjoy working at the intersection of engineering, product, and design to build engaging, accessible user experiences.';
 
-const focus = ['Frontend', 'Accessibility', 'Engineering × product × design'];
 
 // Each card links to its playable deployment (workers.dev). Private repositories are never linked.
 const work = [
@@ -41,23 +40,27 @@ const work = [
 ---
 
 <Base title="Tony Martinez · Frontend and accessibility engineer" description={bio}>
-  <PageHeader tone="mint" eyebrow="Hey, I’m" title="Tony Martinez" lede={bio} class="hero">
-    <ul class="chip-list focus" aria-label="What I focus on">
-      {
-        focus.map((f) => (
-          <li>
-            <Chip>{f}</Chip>
-          </li>
-        ))
-      }
-    </ul>
-    <div class="btn-row">
-      <Button href="#work" variant="primary" size="lg" iconAfter="arrow">Selected work</Button>
-      <Button href="https://github.com/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">GitHub</Button>
-      <Button href="https://www.linkedin.com/in/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">LinkedIn</Button>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Frontend and accessibility engineer</p>
+        <h1>Tony Martinez</h1>
+        <p class="hero-claim">I run a fleet of AI agents that build and ship my projects, end to end.</p>
+        <p class="hero-sub">
+          Nine years of frontend and accessibility work, now pointed at{' '}
+          <a href="https://github.com/tonyjmartinez/pi-durable-local">pi-durable-local</a>, a small software factory
+          where durable agent sessions take work from idea to merged PR under budgets and merge gates.
+        </p>
+        <div class="btn-row">
+          <Button href="#work" variant="primary" size="lg" iconAfter="arrow">Selected work</Button>
+          <Button href="https://github.com/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">GitHub</Button>
+          <Button href="https://www.linkedin.com/in/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">LinkedIn</Button>
+          <Button href="mailto:ajosephmartinez@gmail.com" variant="secondary" size="lg" iconAfter="arrow">Email</Button>
+        </div>
+      </div>
+      <Pipeline />
     </div>
-    <PlantArt slot="art" kind="rosette" leaf="#9ccfc4" tip="#ff86ad" />
-  </PageHeader>
+  </header>
 
   <section id="work" class="work" aria-labelledby="work-title">
     <h2 id="work-title">Selected work</h2>
@@ -102,27 +105,40 @@ const work = [
 </Base>
 
 <style>
-  /* The intro fills the first screen; the footer sits just below it. */
   .hero {
-    min-height: calc(100svh - 4.5rem);
+    padding-block: clamp(3rem, 9vw, 7rem) clamp(2.5rem, 6vw, 5rem);
+    border-bottom: var(--border) solid var(--line);
+  }
+  .hero-grid {
     display: grid;
-    align-content: center;
+    gap: var(--space-7);
+    align-items: center;
   }
-
-  .hero :global(.lede) {
-    max-width: 46ch;
-  }
-
-  @media (max-width: 51.99rem) {
-    .hero :global(.page-head-art) {
-      max-width: 11rem;
+  @media (min-width: 64rem) {
+    .hero-grid {
+      grid-template-columns: 1.3fr 1fr;
     }
   }
-
-  .focus {
-    margin: var(--space-5) 0 var(--space-6);
+  .hero-text {
+    min-width: 0;
   }
-
+  .hero h1 {
+    font-size: var(--step-5);
+    margin-bottom: var(--space-4);
+  }
+  .hero-claim {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 22ch;
+    margin-bottom: var(--space-4);
+  }
+  .hero-sub {
+    color: var(--text-muted);
+    max-width: 52ch;
+    margin-bottom: var(--space-6);
+  }
   .work {
     padding: var(--space-8) 0 var(--space-7);
   }

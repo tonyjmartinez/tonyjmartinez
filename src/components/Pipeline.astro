@@ -1,0 +1,123 @@
+---
+/**
+ * Pipeline: the hero's signature element. Four stages (goal, PR, review, merge)
+ * that light up in turn.
+ * Pure CSS; the animation is removed under prefers-reduced-motion and the
+ * static list reads the same without it.
+ */
+const stages = [
+  { n: '01', name: 'Goal', note: 'A loop wakes with a budget and a brief' },
+  { n: '02', name: 'PR', note: 'The agent opens it from a template' },
+  { n: '03', name: 'Review', note: 'Checks run, then an independent review' },
+  { n: '04', name: 'Merge', note: 'Gated: low and medium risk only' },
+];
+---
+
+<figure class="pipeline">
+  <figcaption class="pipeline-title"><span class="dot" aria-hidden="true"></span>How a change ships</figcaption>
+  <ol class="stages">
+    {
+      stages.map((s, i) => (
+        <li class="stage" style={`--i:${i}`}>
+          <span class="stage-n" aria-hidden="true">{s.n}</span>
+          <span class="stage-name">{s.name}</span>
+          <span class="stage-note">{s.note}</span>
+        </li>
+      ))
+    }
+  </ol>
+</figure>
+
+<style>
+  .pipeline {
+    margin: 0;
+    padding: var(--space-5);
+    background: var(--surface);
+    border: var(--border) solid var(--line);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    position: relative;
+  }
+  .pipeline-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+  .dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .stages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .stage {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border: var(--border) solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+  }
+  .stage-n {
+    grid-row: span 2;
+    color: var(--accent);
+    font-size: var(--step--1);
+    align-self: center;
+  }
+  .stage-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--text);
+  }
+  .stage-note {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    font-family: var(--font-body);
+  }
+
+  @media (min-width: 52rem) {
+    .stages {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .stage {
+      animation: stage-glow 8s var(--ease) infinite;
+      animation-delay: calc(var(--i) * 2s);
+    }
+    .dot {
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+  @keyframes stage-glow {
+    0%,
+    4% {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    24%,
+    100% {
+      border-color: var(--line);
+      background: var(--paper);
+    }
+  }
+  @keyframes pulse {
+    50% {
+      opacity: 0.3;
+    }
+  }
+</style>
