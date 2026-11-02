@@ -236,7 +236,21 @@ hr {
     --surface: #fff;
     --text: #000;
     --text-muted: #000;
+    --accent: #000;
+    --accent-soft: #fff;
+    --on-accent: #fff;
+    --line: #000;
     --shadow: transparent;
+  }
+  .card,
+  article,
+  figure {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
   }
   body {
     background: #fff;
