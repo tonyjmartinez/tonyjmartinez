@@ -100,10 +100,12 @@ test('_headers CSP is self-only (no external origins)', () => {
   assert.match(m[1], /frame-ancestors 'none'/);
 });
 
-test('hero has email, pipeline and no plant art', () => {
+test('hero leads with Tony, mentions the factory once, and has email', () => {
   const html = read('index.html');
   assert.match(html, /href="mailto:ajosephmartinez@gmail\.com"/);
-  assert.match(html, /class="[^"]*pipeline/);
+  assert.match(html, /<p class="hero-claim"[^>]*>/);
+  assert.equal((html.match(/class="hero-sub"/g) ?? []).length, 1);
+  assert.doesNotMatch(html, /class="[^"]*pipeline/);
   assert.doesNotMatch(html, /Hey, I/);
 });
 
