@@ -1,9 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
-import Factory from '../components/Factory.astro';
 import Approach from '../components/Approach.astro';
-import Pipeline from '../components/Pipeline.astro';
 import { Button, Chip } from '@/components/ui';
 import succulents from '../assets/work/succulents-info.webp';
 import tonezone from '../assets/work/tonezone-survivor.webp';
@@ -75,11 +73,11 @@ const work = [
       <div class="hero-text">
         <p class="eyebrow">Frontend and accessibility engineer</p>
         <h1>Tony Martinez</h1>
-        <p class="hero-claim">I run a fleet of AI agents that build and ship my projects, end to end.</p>
+        <p class="hero-claim">I build interfaces that are fast, accessible and carefully made.</p>
         <p class="hero-sub">
-          Nine years of frontend and accessibility work, now pointed at{' '}
-          <a href="https://github.com/tonyjmartinez/pi-durable-local">pi-durable-local</a>, a small software factory
-          where durable agent sessions take work from idea to merged PR under budgets and merge gates.
+          Nine years of frontend and accessibility work at the intersection of engineering, product and design.
+          I also run <a href="https://github.com/tonyjmartinez/pi-durable-local">pi-durable-local</a>, a small
+          software factory where agent sessions ship code under budgets and merge gates.
         </p>
         <div class="btn-row">
           <Button href="#work" variant="primary" size="lg" iconAfter="arrow">Selected work</Button>
@@ -88,7 +86,6 @@ const work = [
           <Button href="mailto:ajosephmartinez@gmail.com" variant="secondary" size="lg" iconAfter="arrow">Email</Button>
         </div>
       </div>
-      <Pipeline />
     </div>
   </header>
 
@@ -140,7 +137,6 @@ const work = [
     </ul>
   </section>
 
-  <Factory />
   <Approach />
 </Base>
 
@@ -156,7 +152,7 @@ const work = [
   }
   @media (min-width: 64rem) {
     .hero-grid {
-      grid-template-columns: 1.3fr 1fr;
+      max-width: 46rem;
     }
   }
   .hero-text {
