@@ -1,5 +1,9 @@
 # Roadmap: next milestone
 
+## Direction v4 (2026-11-09, supersedes v2/v3): simple
+
+One narrow column: name, role, bio, contact links, and a short plain list of live projects. No screenshots, case studies or factory talk. Add things back only when Tony asks.
+
 ## Direction v2 (supersedes the "no new fonts/images/deps" rule below)
 
 Significant redesign: dark-first, editorial, one accent colour (teal), Bricolage Grotesque + Atkinson, zero third-party requests, CSP self-only, all motion off under `prefers-reduced-motion`. Story: frontend + accessibility engineer who runs a fleet of AI agents (pi-durable-local) that build and ship his projects. Ordered PRs:
