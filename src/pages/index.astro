@@ -1,263 +1,135 @@
 ---
 import Base from '../layouts/Base.astro';
-import { Image } from 'astro:assets';
-import Approach from '../components/Approach.astro';
-import { Button, Chip } from '@/components/ui';
-import succulents from '../assets/work/succulents-info.webp';
-import tonezone from '../assets/work/tonezone-survivor.webp';
-import avsa from '../assets/work/agent-vs-agent.webp';
-import garden from '../assets/work/phaser-game.webp';
 
 const bio =
   'Software engineer with 9 years of experience focused on frontend and accessibility. I enjoy working at the intersection of engineering, product, and design to build engaging, accessible user experiences.';
 
-
-// Each card links to its playable deployment (workers.dev). Private repositories are never linked.
-// Sources: pi-durable-local README, agent-vs-agent README, existing copy for the rest.
+// Each project links to its live deployment. Private repositories are never linked.
 const work = [
   {
-    title: 'pi-durable-local',
-    status: 'Public repo · in daily use',
-    summary: 'A small software factory: durable agent sessions take work from idea to merged PR in a sandbox, under budgets and merge gates.',
-    source: 'https://github.com/tonyjmartinez/pi-durable-local',
-    study: '/work/pi-durable-local/',
-    tags: ['Node', 'SQLite', 'Agents'],
-    tile: true,
+    title: 'Curb Cut',
+    href: 'https://curb-cut.ajosephmartinez.workers.dev/',
+    summary: 'Features built for disabled people quietly make everyday life better for everyone.',
   },
   {
     title: 'Tone Zone Survivors',
     href: 'https://tonezone-survivor.ajosephmartinez.workers.dev/',
-    shot: tonezone,
-    alt: 'Tone Zone Survivors title screen with controls and upgrade shop in pixel text on a dark background.',
-    status: 'Playable in browser',
-    summary: 'A Vampire Survivors-like in plain HTML5 canvas with no build step; weapons fire automatically and you pick upgrades on level-up.',
+    summary: 'A survivors-style action game in plain HTML5 canvas, playable in the browser.',
     source: 'https://github.com/tonyjmartinez/tonezone-survivor',
-    study: '/work/tonezone-survivor/',
-    tags: ['JavaScript', 'HTML5 canvas'],
   },
   {
     title: 'Agent vs Agent',
     href: 'https://agent-vs-agent.ajosephmartinez.workers.dev/',
-    shot: avsa,
-    alt: 'Agent vs Agent start screen for a bump-and-run spy board game.',
-    status: 'Playable in browser',
-    summary: 'A bump-and-run spy board game for phone and desktop on a 6×6 board, with 21 missions each proven solvable by tests.',
+    summary: 'A bump-and-run spy board game for phone and desktop.',
     source: 'https://github.com/tonyjmartinez/agent-vs-agent',
-    study: '/work/agent-vs-agent/',
-    tags: ['TypeScript', 'Playwright'],
   },
   {
     title: 'Succulents.info',
     href: 'https://succulents-info.ajosephmartinez.workers.dev/',
-    shot: succulents,
-    alt: 'Succulents.info home page: plain-language succulent care with a close photo of rosette succulents.',
-    status: 'Live',
-    summary: 'Plain-language succulent care guides, a plant library, and a symptom-led plant doctor.',
-    tags: ['Astro', 'Static site'],
+    summary: 'Plain-language succulent care guides, a plant library and a plant doctor.',
   },
-  {
-    title: 'Garden Defense',
-    href: 'https://phaser-game.ajosephmartinez.workers.dev/',
-    shot: garden,
-    alt: 'Garden Defense title screen: pixel title over a green garden with trees and a gardener.',
-    status: 'In development',
-    summary: 'A browser game in development, built with Phaser.',
-    tags: ['Phaser'],
-  },
+];
+
+const links = [
+  { label: 'Email', href: 'mailto:ajosephmartinez@gmail.com' },
+  { label: 'GitHub', href: 'https://github.com/tonyjmartinez' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/tonyjmartinez' },
 ];
 ---
 
 <Base title="Tony Martinez · Frontend and accessibility engineer" description={bio}>
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">Frontend and accessibility engineer</p>
-        <h1>Tony Martinez</h1>
-        <p class="hero-claim">I build interfaces that are fast, accessible and carefully made.</p>
-        <p class="hero-sub">
-          Nine years of frontend and accessibility work at the intersection of engineering, product and design.
-          I also run <a href="https://github.com/tonyjmartinez/pi-durable-local">pi-durable-local</a>, a small
-          software factory where agent sessions ship code under budgets and merge gates.
-        </p>
-        <div class="btn-row">
-          <Button href="#work" variant="primary" size="lg" iconAfter="arrow">Selected work</Button>
-          <Button href="https://github.com/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">GitHub</Button>
-          <Button href="https://www.linkedin.com/in/tonyjmartinez" variant="secondary" size="lg" iconAfter="arrow">LinkedIn</Button>
-          <Button href="mailto:ajosephmartinez@gmail.com" variant="secondary" size="lg" iconAfter="arrow">Email</Button>
-        </div>
-      </div>
-    </div>
-  </header>
+  <div class="wrap page">
+    <header class="intro">
+      <h1>Tony Martinez</h1>
+      <p class="role">Frontend and accessibility engineer</p>
+      <p class="bio">{bio}</p>
+      <ul class="links" aria-label="Contact">
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </header>
 
-  <section id="work" class="work" aria-labelledby="work-title">
-    <h2 id="work-title">Selected work</h2>
-    <p class="work-intro">Projects I am building. Each card opens the live version; some also link to source code.</p>
-    <ul class="grid work-grid">
-      {
-        work.map((w) => (
-          <li>
-            <article class="card work-card">
-              {w.shot ? (
-                <Image class="work-shot" src={w.shot} alt={w.alt} width={640} height={400} widths={[480, 640]} sizes="(min-width: 64rem) 30vw, (min-width: 40rem) 45vw, 90vw" loading="lazy" format="webp" />
-              ) : (
-                <div class="work-shot work-tile" aria-hidden="true">
-                  <span>goal</span><span>→ PR</span><span>→ review</span><span>→ merge</span>
-                </div>
-              )}
-              <h3>
-                {w.href ? <a class="card-link" href={w.href}>{w.title}</a> : w.title}
-              </h3>
-              <p class="work-status">{w.status}</p>
+    <section id="work" aria-labelledby="work-title">
+      <h2 id="work-title">Projects</h2>
+      <ul class="work-list">
+        {
+          work.map((w) => (
+            <li>
+              <a class="work-title" href={w.href}>{w.title}</a>
               <p>{w.summary}</p>
-              <ul class="chip-list" aria-label="Built with">
-                {w.tags.map((t) => (
-                  <li>
-                    <Chip>{t}</Chip>
-                  </li>
-                ))}
-              </ul>
-              {
-                w.study && (
-                  <a class="work-source" href={w.study}>
-                    Read the case study<span class="visually-hidden"> for {w.title}</span>
-                  </a>
-                )
-              }
-              {
-                w.source && (
-                  <a class="work-source" href={w.source}>
-                    Source code on GitHub<span class="visually-hidden"> for {w.title}</span>
-                  </a>
-                )
-              }
-            </article>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <Approach />
+              {w.source && (
+                <a class="work-source" href={w.source}>
+                  Source<span class="visually-hidden"> code for {w.title}</span>
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
 </Base>
 
 <style>
-  .hero {
-    padding-block: clamp(3rem, 9vw, 7rem) clamp(2.5rem, 6vw, 5rem);
-    border-bottom: var(--border) solid var(--line);
+  .page {
+    max-width: 40rem;
+    padding-block: clamp(3rem, 10vw, 6rem) var(--space-6);
   }
-  .hero-grid {
-    display: grid;
-    gap: var(--space-7);
-    align-items: center;
+  h1 {
+    font-size: var(--step-4);
+    margin: 0 0 var(--space-2);
   }
-  @media (min-width: 64rem) {
-    .hero-grid {
-      max-width: 46rem;
-    }
-  }
-  .hero-text {
-    min-width: 0;
-  }
-  .hero h1 {
-    font-size: var(--step-5);
-    margin-bottom: var(--space-4);
-  }
-  .hero-claim {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    max-width: 22ch;
-    margin-bottom: var(--space-4);
-  }
-  .hero-sub {
-    color: var(--text-muted);
-    max-width: 52ch;
-    margin-bottom: var(--space-6);
-  }
-  .work :global(.work-shot) {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 8 / 5;
-    object-fit: cover;
-    border: var(--border) solid var(--line);
-    border-radius: var(--radius-sm);
-    margin-bottom: var(--space-4);
-  }
-
-  .work {
-    padding: var(--space-8) 0 var(--space-7);
-  }
-
-  .work h2 {
-    margin-bottom: var(--space-2);
-  }
-
-  .work-intro {
-    margin: 0 0 var(--space-6);
-    max-width: 52ch;
-  }
-
-  .work-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    height: 100%;
-    padding: var(--space-5);
-  }
-
-  .work-card h3 {
-    margin: 0;
-  }
-
-  .work-card p {
-    margin: 0;
-  }
-
-  .work :global(.work-tile) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-4);
-    background: var(--surface-2);
-    font-family: var(--font-mono);
-    font-size: var(--step-0);
+  .role {
+    margin: 0 0 var(--space-5);
     color: var(--accent);
-  }
-  .work-card {
-    transition: transform var(--dur, 200ms) var(--ease, ease), border-color var(--dur, 200ms) var(--ease, ease);
-  }
-  .work-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .work-card {
-      transition: none;
-    }
-    .work-card:hover {
-      transform: none;
-    }
-  }
-  .work-status {
-    font-size: var(--step--1);
     font-weight: 700;
   }
-
-  .work-card .chip-list {
-    margin-top: auto;
+  .bio {
+    margin: 0 0 var(--space-5);
+    color: var(--text-muted);
   }
-
-  /* Sits above the stretched card link so it is independently clickable. */
+  .links,
+  .work-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .links li,
+  .work-list li {
+    margin: 0;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+  .links a,
   .work-source {
-    position: relative;
-    z-index: 1;
-    align-self: flex-start;
-    font-weight: 700;
-    min-height: 2.75rem;
     display: inline-flex;
     align-items: center;
+    min-height: 2.75rem;
+    font-weight: 700;
+  }
+  #work {
+    margin-top: var(--space-7);
+  }
+  h2 {
+    font-size: var(--step-1);
+    margin: 0 0 var(--space-4);
+  }
+  .work-list {
+    display: grid;
+    gap: var(--space-5);
+  }
+  .work-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 700;
+  }
+  .work-list p {
+    margin: var(--space-1) 0 0;
+    color: var(--text-muted);
+  }
+  .work-source {
+    font-size: var(--step--1);
   }
 </style>

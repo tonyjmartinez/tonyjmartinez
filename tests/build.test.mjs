@@ -71,18 +71,17 @@ test('external target=_blank links use rel noopener', () => {
   }
 });
 
-test('Selected work section links to public workers.dev deployments only', () => {
+test('Projects section links to public workers.dev deployments only', () => {
   const html = read('index.html');
   assert.match(html, /<section id="work"[^>]*aria-labelledby="work-title"/);
-  for (const u of ['succulents-info', 'tonezone-survivor', 'phaser-game', 'agent-vs-agent']) {
+  for (const u of ['curb-cut', 'succulents-info', 'tonezone-survivor', 'agent-vs-agent']) {
     assert.match(html, new RegExp(`href="https://${u}\\.ajosephmartinez\\.workers\\.dev/"`));
   }
-  assert.doesNotMatch(html, /github\.com\/tonyjmartinez\/phaser-game/);
-  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/tonezone-survivor"[^>]*>Source code on GitHub/);
+  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/tonezone-survivor"/);
   assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/agent-vs-agent"/);
-  assert.match(html, /href="https:\/\/github\.com\/tonyjmartinez\/pi-durable-local"[^>]*>Source code on GitHub/);
-  assert.doesNotMatch(html, /github\.com\/tonyjmartinez\/succulents/);
-  assert.equal((html.match(/class="card work-card/g) || []).length, 5);
+  for (const priv of ['succulents', 'curb-cut', 'phaser-game']) {
+    assert.doesNotMatch(html, new RegExp(`github\\.com/tonyjmartinez/${priv}`));
+  }
 });
 
 test('home page has LinkedIn link and a back-to-top anchor to an existing id', () => {
@@ -100,34 +99,10 @@ test('_headers CSP is self-only (no external origins)', () => {
   assert.match(m[1], /frame-ancestors 'none'/);
 });
 
-test('hero leads with Tony, mentions the factory once, and has email', () => {
+test('home page leads with Tony, has email, and no factory or case-study content', () => {
   const html = read('index.html');
   assert.match(html, /href="mailto:ajosephmartinez@gmail\.com"/);
-  assert.match(html, /<p class="hero-claim"[^>]*>/);
-  assert.equal((html.match(/class="hero-sub"/g) ?? []).length, 1);
-  assert.doesNotMatch(html, /class="[^"]*pipeline/);
-  assert.doesNotMatch(html, /Hey, I/);
-});
-
-test('work cards render optimised screenshots with alt text and dimensions', () => {
-  const html = read('index.html');
-  const imgs = [...html.matchAll(/<img[^>]*class="[^"]*work-shot[^"]*"[^>]*>/g)].map((m) => m[0]);
-  assert.ok(imgs.length >= 3);
-  for (const i of imgs) {
-    assert.match(i, /alt="[^"]{10,}"/);
-    assert.match(i, /width="\d+"/);
-    assert.match(i, /height="\d+"/);
-    assert.match(i, /loading="lazy"/);
-    assert.match(i, /\.webp/);
-  }
-});
-
-test('case-study pages exist, have one h1, and are in the sitemap', () => {
-  for (const slug of ['pi-durable-local', 'tonezone-survivor', 'agent-vs-agent']) {
-    const html = read(`work/${slug}/index.html`);
-    assert.equal((html.match(/<h1[\s>]/g) ?? []).length, 1, slug);
-    assert.match(html, new RegExp(`<link rel="canonical" href="https://tonyjmartinez\\.com/work/${slug}/`));
-    assert.match(read('sitemap.xml'), new RegExp(`/work/${slug}/`));
-    assert.match(read('index.html'), new RegExp(`href="/work/${slug}/"`));
-  }
+  assert.doesNotMatch(html, /pi-durable-local|software factory/i);
+  assert.doesNotMatch(html, /href="\/work\//);
+  assert.doesNotMatch(read('sitemap.xml'), /\/work\//);
 });
