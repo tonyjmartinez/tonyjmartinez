@@ -1,6 +1,6 @@
 # Living memory for the hourly portfolio-iteration routine
 
-Stack: Astro 7 static site (direction v4: simple single-column portfolio; see ROADMAP.md), deployed as a Cloudflare Worker (`wrangler.toml`, serves `dist/`).
+Stack: Astro 7 static site (direction v4: simple single-column portfolio; see ROADMAP.md). Firebase Hosting serves `dist/` for tonyjmartinez.com from the `tonyjmartinez-site` project. Production deploys on pushes to `main` via `.github/workflows/deploy.yml` once the repository's `FIREBASE_SERVICE_ACCOUNT_TONYJMARTINEZ_SITE` secret is configured.
 Single page: `src/pages/index.astro`; layout `src/layouts/Base.astro`; tokens in `src/styles/tokens.css`.
 Goal of the routine: improve capabilities, polish and professionalism WITHOUT adding much content. Verify with `npm run build` (and `npm run check`) before committing. Don't open PRs unless asked; push to the designated branch.
 
