@@ -4,6 +4,16 @@
 
 One narrow column: name, role, bio, contact links, and a short plain list of live projects. No screenshots, case studies or factory talk. Add things back only when Tony asks.
 
+### Small polish backlog (Direction v4)
+
+1. [x] **Keep keyboard focus visible after the skip link.** Remove the main landmark's focus-outline override so it receives the shared `:focus-visible` ring. Test the source styles.
+2. [ ] **Check 200% text zoom at narrow widths.** Verify 320px and 360px layouts remain readable without horizontal scrolling.
+3. [ ] **Verify forced-colors keyboard focus.** Check the skip link, contact links, project links and theme control in Windows high-contrast mode.
+4. [ ] **Audit touch targets at narrow widths.** Keep contact links and the theme control at least 44 CSS pixels high at 320px and 360px.
+5. [ ] **Test theme-toggle keyboard state.** Confirm the accessible pressed state updates when toggling between system, light and dark themes.
+6. [ ] **Check 404 keyboard navigation.** Verify the error page has a visible skip link, logical focus order and a clear route back to the homepage.
+7. [ ] **Recheck project destinations before list changes.** Confirm each destination is live before adding, removing or replacing a project link; don't add unverified claims.
+
 ## Direction v2 (supersedes the "no new fonts/images/deps" rule below)
 
 Significant redesign: dark-first, editorial, one accent colour (teal), Bricolage Grotesque + Atkinson, zero third-party requests, CSP self-only, all motion off under `prefers-reduced-motion`. Story: frontend + accessibility engineer who runs a fleet of AI agents (pi-durable-local) that build and ship his projects. Ordered PRs:

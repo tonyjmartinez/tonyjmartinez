@@ -19,6 +19,13 @@ test('home page has lang, title, description, one h1', () => {
   assert.equal((html.match(/<h1[\s>]/g) ?? []).length, 1);
 });
 
+test('skip-link target keeps the shared keyboard focus indicator', () => {
+  const layout = readFileSync(new URL('../src/layouts/Base.astro', import.meta.url), 'utf8');
+  const base = readFileSync(new URL('../src/styles/base.css', import.meta.url), 'utf8');
+  assert.doesNotMatch(layout, /main:focus\s*\{\s*outline:\s*none\s*;/);
+  assert.match(base, /:focus-visible\s*\{\s*outline:\s*3px solid var\(--focus-ring\)/);
+});
+
 test('404 page is noindex', () => {
   assert.match(read('404.html'), /<meta name="robots" content="[^"]*noindex/);
 });
