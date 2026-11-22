@@ -32,7 +32,7 @@ test('exits 1 when a page overflows horizontally', { skip: !canBrowse && 'no lau
   const root = mkdtempSync(join(tmpdir(), 'vc-fixture-'));
   mkdirSync(root, { recursive: true });
   writeFileSync(join(root, 'index.html'), '<!doctype html><title>x</title><div style="width:2000px">wide</div>');
-  const r = run(['--root', root, '--widths', '375', '--out', join(root, 'shots')]);
+  const r = run(['--root', root, '--widths', '375', '--zoom', '2', '--out', join(root, 'shots')]);
   assert.equal(r.status, 1, r.stderr);
   assert.match(r.stdout, /overflowPx=[1-9]/);
 });
