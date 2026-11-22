@@ -7,7 +7,7 @@ One narrow column: name, role, bio, contact links, and a short plain list of liv
 ### Small polish backlog (Direction v4)
 
 1. [x] **Keep keyboard focus visible after the skip link.** Remove the main landmark's focus-outline override so it receives the shared `:focus-visible` ring. Test the source styles.
-2. [ ] **Check 200% text zoom at narrow widths.** Verify 320px and 360px layouts remain readable without horizontal scrolling.
+2. [x] **Check 200% text zoom at narrow widths.** The visual check supports `--zoom 2`; 320px and 360px remain readable without horizontal scrolling.
 3. [ ] **Verify forced-colors keyboard focus.** Check the skip link, contact links, project links and theme control in Windows high-contrast mode.
 4. [ ] **Audit touch targets at narrow widths.** Keep contact links and the theme control at least 44 CSS pixels high at 320px and 360px.
 5. [ ] **Test theme-toggle keyboard state.** Confirm the accessible pressed state updates when toggling between system, light and dark themes.

@@ -3,7 +3,7 @@
 // horizontal overflow. Serves dist/ in-process, so no background preview server
 // is needed and nothing is left running afterwards.
 //
-// Usage: node scripts/visual-check.mjs [--widths 320,360,375,1280] [--out /tmp/visual]
+// Usage: node scripts/visual-check.mjs [--widths 320,360,375,1280] [--zoom 1] [--out /tmp/visual]
 // Requires the `playwright` package to be installed in the project (it is not a
 // dependency yet; adding it is a package.json change for a maintainer). The browser
 // executable is taken from CHROMIUM when set, otherwise Playwright's bundled browser.
@@ -21,7 +21,13 @@ const opt = (name, fallback) => {
 };
 const root = resolve(opt('--root', fileURLToPath(new URL('../dist/', import.meta.url))));
 const widths = opt('--widths', '320,360,375,1280').split(',').map(Number).filter(Boolean);
+const zoom = Number(opt('--zoom', '1'));
 const outDir = resolve(opt('--out', '/tmp/visual-check'));
+
+if (!Number.isFinite(zoom) || zoom <= 0) {
+  console.error('--zoom must be a positive number.');
+  process.exit(2);
+}
 
 if (!existsSync(join(root, 'index.html'))) {
   console.error(`No index.html in ${root}. Run "npm run build" first (or pass --root).`);
@@ -73,8 +79,10 @@ try {
   for (const width of widths) {
     const page = await browser.newPage({ viewport: { width, height: 900 } });
     await page.goto(base, { waitUntil: 'networkidle' });
+    if (zoom !== 1) await page.addStyleTag({ content: `html { zoom: ${zoom}; }` });
     const overflow = await page.evaluate(
-      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      (scale) => Math.max(0, Math.ceil(document.documentElement.scrollWidth / scale) - document.documentElement.clientWidth),
+      zoom,
     );
     const file = join(outDir, `index-${width}.png`);
     await page.screenshot({ path: file, fullPage: true });
